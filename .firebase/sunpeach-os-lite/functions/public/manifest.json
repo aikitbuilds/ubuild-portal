@@ -1,0 +1,31 @@
+{
+    "name": "uBuild - AI Software Agency",
+    "short_name": "uBuild",
+    "description": "Turn your idea into a production-ready MVP in 5 automated stages with our 6 AI agents.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020617",
+    "theme_color": "#0d9488",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "business",
+        "productivity",
+        "utilities"
+    ],
+    "lang": "en-US",
+    "dir": "ltr"
+}

@@ -1,0 +1,51 @@
+globalThis.__BUILD_MANIFEST = {
+  "pages": {
+    "/_app": [
+      "static/chunks/5aa9f_next_dist_compiled_35aac16a._.js",
+      "static/chunks/5aa9f_next_dist_shared_lib_45a19e42._.js",
+      "static/chunks/5aa9f_next_dist_client_393378a3._.js",
+      "static/chunks/5aa9f_next_dist_571522a4._.js",
+      "static/chunks/5aa9f_next_app_2a8bf07c.js",
+      "static/chunks/[next]_entry_page-loader_ts_fca24f14._.js",
+      "static/chunks/5aa9f_react-dom_27aedcf7._.js",
+      "static/chunks/5aa9f_cfc74e6f._.js",
+      "static/chunks/[root-of-the-server]__cbba57e9._.js",
+      "static/chunks/Documents_Active Projects_ubuild_ubuild-portal_pages__app_2da965e7._.js",
+      "static/chunks/turbopack-Documents_Active Projects_ubuild_ubuild-portal_pages__app_472fb1a9._.js"
+    ],
+    "/_error": [
+      "static/chunks/5aa9f_next_dist_compiled_35aac16a._.js",
+      "static/chunks/5aa9f_next_dist_shared_lib_8d61b65f._.js",
+      "static/chunks/5aa9f_next_dist_client_393378a3._.js",
+      "static/chunks/5aa9f_next_dist_c2c17876._.js",
+      "static/chunks/5aa9f_next_error_e41975f6.js",
+      "static/chunks/[next]_entry_page-loader_ts_af333825._.js",
+      "static/chunks/5aa9f_react-dom_27aedcf7._.js",
+      "static/chunks/5aa9f_cfc74e6f._.js",
+      "static/chunks/[root-of-the-server]__c8beb9eb._.js",
+      "static/chunks/Documents_Active Projects_ubuild_ubuild-portal_pages__error_2da965e7._.js",
+      "static/chunks/turbopack-Documents_Active Projects_ubuild_ubuild-portal_pages__error_4626bf36._.js"
+    ]
+  },
+  "devFiles": [],
+  "polyfillFiles": [
+    "static/chunks/5aa9f_next_dist_build_polyfills_polyfill-nomodule.js"
+  ],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_d726bedb._.js",
+    "static/chunks/5aa9f_next_dist_compiled_react-dom_8d69dcd6._.js",
+    "static/chunks/5aa9f_next_dist_compiled_react-server-dom-turbopack_adaefb8c._.js",
+    "static/chunks/5aa9f_next_dist_compiled_next-devtools_index_deb14b50.js",
+    "static/chunks/5aa9f_next_dist_compiled_ab4daf56._.js",
+    "static/chunks/5aa9f_next_dist_client_1aa3ec1e._.js",
+    "static/chunks/5aa9f_next_dist_c57f8c67._.js",
+    "static/chunks/5aa9f_@swc_helpers_cjs_3d7150e2._.js",
+    "static/chunks/Documents_Active Projects_ubuild_ubuild-portal_a0ff3932._.js",
+    "static/chunks/turbopack-Documents_Active Projects_ubuild_ubuild-portal_a07f889c._.js"
+  ]
+};
+globalThis.__BUILD_MANIFEST.lowPriorityFiles = [
+"/static/" + process.env.__NEXT_BUILD_ID + "/_buildManifest.js",
+"/static/" + process.env.__NEXT_BUILD_ID + "/_ssgManifest.js"
+];

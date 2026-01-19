@@ -1,0 +1,71 @@
+{
+  "status": "success",
+  "result": [
+    {
+      "projectId": "aiaxos-project-hub",
+      "projectNumber": "911802805262",
+      "displayName": "ucrewpro",
+      "name": "projects/aiaxos-project-hub",
+      "resources": {
+        "hostingSite": "aiaxos-project-hub"
+      },
+      "state": "ACTIVE",
+      "etag": "1_3fbe6a23-2e8e-4509-a1f9-eb9e0a95e7b2"
+    },
+    {
+      "projectId": "gen-lang-client-0686783756",
+      "projectNumber": "942449514075",
+      "displayName": "SPS-OSX",
+      "name": "projects/gen-lang-client-0686783756",
+      "resources": {
+        "hostingSite": "gen-lang-client-0686783756"
+      },
+      "state": "ACTIVE",
+      "etag": "1_05b0b25f-f7bf-4320-98ed-7e77daae733a"
+    },
+    {
+      "projectId": "golden-cove-450322-g7",
+      "projectNumber": "597599823330",
+      "displayName": "solrigs",
+      "name": "projects/golden-cove-450322-g7",
+      "resources": {
+        "hostingSite": "golden-cove-450322-g7"
+      },
+      "state": "ACTIVE",
+      "etag": "1_2c7667dc-f59f-4dca-afd7-ef9710a05f02"
+    },
+    {
+      "projectId": "profitwise-ai",
+      "projectNumber": "724260726362",
+      "displayName": "vpacer",
+      "name": "projects/profitwise-ai",
+      "resources": {
+        "hostingSite": "profitwise-ai"
+      },
+      "state": "ACTIVE",
+      "etag": "1_e08cea99-55ec-45ce-8852-043b6069e492"
+    },
+    {
+      "projectId": "sps-leadscleandb",
+      "projectNumber": "1076485974016",
+      "displayName": "Prepproto",
+      "name": "projects/sps-leadscleandb",
+      "resources": {
+        "hostingSite": "sps-leadscleandb"
+      },
+      "state": "ACTIVE",
+      "etag": "1_f6a7b724-0bb5-41ca-9f5f-7a2b505f9a14"
+    },
+    {
+      "projectId": "sunpeach-os-lite",
+      "projectNumber": "791075042221",
+      "displayName": "ubuildpro",
+      "name": "projects/sunpeach-os-lite",
+      "resources": {
+        "hostingSite": "sunpeach-os-lite"
+      },
+      "state": "ACTIVE",
+      "etag": "1_ad517425-f502-49ab-a7ef-6a49d1e568e1"
+    }
+  ]
+}
