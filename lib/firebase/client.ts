@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD0V_w0uguZOvsHZ0E3aqtWY6IdRt6DKL4",
-    authDomain: "sunpeach-os-lite.firebaseapp.com",
-    projectId: "sunpeach-os-lite",
-    storageBucket: "sunpeach-os-lite.firebasestorage.app",
-    messagingSenderId: "791075042221",
-    appId: "1:791075042221:web:7af1b1b883b8b1592fa724"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 // Singleton pattern to prevent multiple initializations
