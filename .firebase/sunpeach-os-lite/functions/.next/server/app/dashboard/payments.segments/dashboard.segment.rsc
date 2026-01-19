@@ -1,5 +1,0 @@
-1:"$Sreact.fragment"
-2:I[79113,["/_next/static/chunks/c1b501eef5d617e0.js","/_next/static/chunks/8644b899ec199162.js","/_next/static/chunks/b35e3a8680b6c531.js","/_next/static/chunks/3624b6ba9d9f73b0.js"],"Sidebar"]
-3:I[67051,["/_next/static/chunks/6ea4e0e91673ad13.js","/_next/static/chunks/05dabe668c3ef0f8.js"],"default"]
-4:I[52602,["/_next/static/chunks/6ea4e0e91673ad13.js","/_next/static/chunks/05dabe668c3ef0f8.js"],"default"]
-0:{"buildId":"HZLz9oLlM66K4GDYB4O8V","rsc":["$","$1","c",{"children":[[["$","script","script-0",{"src":"/_next/static/chunks/8644b899ec199162.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/b35e3a8680b6c531.js","async":true}],["$","script","script-2",{"src":"/_next/static/chunks/3624b6ba9d9f73b0.js","async":true}]],["$","div",null,{"className":"flex h-screen overflow-hidden bg-slate-50/50","children":[["$","$L2",null,{}],["$","main",null,{"className":"flex-1 overflow-y-auto p-8","children":["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}]}]}]]}]]}],"loading":null,"isPartial":false}
