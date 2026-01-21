@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +37,12 @@
         }
 
         /* Reset & Base */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: var(--font-family);
             background-color: var(--bg-dark);
@@ -48,27 +54,95 @@
         }
 
         /* Layout Utilities */
-        .container { max-width: 1200px; margin: 0 auto; padding: var(--space-m); width: 100%; }
-        .grid { display: grid; gap: var(--space-m); }
-        .flex { display: flex; gap: var(--space-m); }
-        .flex-col { flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .hidden { display: none !important; }
-        .text-center { text-align: center; }
-        .w-full { width: 100%; }
-        .mt-4 { margin-top: var(--space-m); }
-        .mb-4 { margin-bottom: var(--space-m); }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-m);
+            width: 100%;
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--space-m);
+        }
+
+        .flex {
+            display: flex;
+            gap: var(--space-m);
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .mt-4 {
+            margin-top: var(--space-m);
+        }
+
+        .mb-4 {
+            margin-bottom: var(--space-m);
+        }
 
         /* Typography */
-        h1 { font-size: var(--font-size-xxl); font-weight: 800; color: var(--brand-orange); }
-        h2 { font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--space-m); }
-        h3 { font-size: var(--font-size-lg); font-weight: 600; margin-bottom: var(--space-s); }
-        p { color: var(--text-secondary); margin-bottom: var(--space-s); }
-        .val-highlight { color: var(--text-primary); font-weight: bold; }
-        .text-orange { color: var(--brand-orange); }
-        .text-green { color: var(--status-green); }
-        .text-red { color: var(--status-red); }
+        h1 {
+            font-size: var(--font-size-xxl);
+            font-weight: 800;
+            color: var(--brand-orange);
+        }
+
+        h2 {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-m);
+        }
+
+        h3 {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-s);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-s);
+        }
+
+        .val-highlight {
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .text-orange {
+            color: var(--brand-orange);
+        }
+
+        .text-green {
+            color: var(--status-green);
+        }
+
+        .text-red {
+            color: var(--status-red);
+        }
 
         /* Components */
         .btn {
@@ -85,23 +159,58 @@
             transition: all 0.2s;
             font-size: 1rem;
         }
-        .btn-primary { background-color: var(--brand-orange); color: white; }
-        .btn-primary:hover { background-color: var(--brand-orange-hover); transform: translateY(-1px); }
-        .btn-secondary { background-color: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border-color); }
-        .btn-secondary:hover { background-color: #333; }
-        .btn-lg { padding: 16px 32px; font-size: 1.25rem; width: 100%; }
-        .btn-sm { padding: 8px 16px; font-size: 0.875rem; }
+
+        .btn-primary {
+            background-color: var(--brand-orange);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-orange-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-input);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #333;
+        }
+
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 1.25rem;
+            width: 100%;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.875rem;
+        }
 
         .card {
             background-color: var(--bg-card);
             border-radius: 12px;
             padding: var(--space-l);
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .input-group { margin-bottom: var(--space-m); text-align: left; }
-        .input-group label { display: block; margin-bottom: var(--space-xs); font-size: 0.875rem; color: var(--text-secondary); }
+        .input-group {
+            margin-bottom: var(--space-m);
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
         .input-field {
             width: 100%;
             padding: 12px;
@@ -111,7 +220,11 @@
             color: white;
             font-size: 1rem;
         }
-        .input-field:focus { outline: 2px solid var(--brand-orange); border-color: transparent; }
+
+        .input-field:focus {
+            outline: 2px solid var(--brand-orange);
+            border-color: transparent;
+        }
 
         /* Navigation */
         .navbar {
@@ -119,17 +232,35 @@
             border-bottom: 1px solid var(--border-color);
             padding: var(--space-m) 0;
         }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; }
-        
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
         /* Dashboard Layout */
         .dashboard-layout {
             display: grid;
             grid-template-columns: 250px 1fr;
             gap: var(--space-l);
-            height: calc(100vh - 73px); /* Navbar height approx */
+            height: calc(100vh - 73px);
+            /* Navbar height approx */
         }
-        .sidebar { padding: var(--space-l) 0; border-right: 1px solid var(--border-color); }
+
+        .sidebar {
+            padding: var(--space-l) 0;
+            border-right: 1px solid var(--border-color);
+        }
+
         .nav-tab {
             width: 100%;
             text-align: left;
@@ -141,17 +272,51 @@
             cursor: pointer;
             border-left: 3px solid transparent;
         }
-        .nav-tab:hover { color: var(--brand-orange); background-color: rgba(255, 140, 0, 0.05); }
-        .nav-tab.active { color: var(--brand-orange); border-left-color: var(--brand-orange); background-color: rgba(255, 140, 0, 0.1); }
 
-        .content-area { padding: var(--space-l); overflow-y: auto; }
+        .nav-tab:hover {
+            color: var(--brand-orange);
+            background-color: rgba(255, 140, 0, 0.05);
+        }
+
+        .nav-tab.active {
+            color: var(--brand-orange);
+            border-left-color: var(--brand-orange);
+            background-color: rgba(255, 140, 0, 0.1);
+        }
+
+        .content-area {
+            padding: var(--space-l);
+            overflow-y: auto;
+        }
 
         /* Tables */
-        .table-container { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th { text-align: left; padding: 12px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase; }
-        td { padding: 12px; border-bottom: 1px solid var(--border-color); }
-        tr:hover { background-color: rgba(255,255,255,0.02); }
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
 
         /* Badges */
         .badge {
@@ -162,28 +327,77 @@
             font-weight: 700;
             text-transform: uppercase;
         }
-        .badge-green { background-color: rgba(76, 175, 80, 0.1); color: var(--status-green); }
-        .badge-red { background-color: rgba(244, 67, 54, 0.1); color: var(--status-red); }
-        .badge-yellow { background-color: rgba(255, 193, 7, 0.1); color: var(--status-yellow); }
+
+        .badge-green {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--status-green);
+        }
+
+        .badge-red {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--status-red);
+        }
+
+        .badge-yellow {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--status-yellow);
+        }
 
         /* Progress Bar */
-        .progress-bar { height: 8px; background-color: var(--bg-input); border-radius: 4px; overflow: hidden; margin-top: 8px; }
-        .progress-fill { height: 100%; background-color: var(--brand-blue); border-radius: 4px; transition: width 0.3s; }
+        .progress-bar {
+            height: 8px;
+            background-color: var(--bg-input);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--brand-blue);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .dashboard-layout { grid-template-columns: 1fr; height: auto; }
-            .sidebar { 
-                display: flex; overflow-x: auto; padding: var(--space-s); 
-                border-right: none; border-bottom: 1px solid var(--border-color);
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+                height: auto;
             }
-            .nav-tab { width: auto; white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
-            .nav-tab.active { border-left: none; border-bottom-color: var(--brand-orange); }
-            .grid-cols-2, .grid-cols-3 { grid-template-columns: 1fr !important; }
-            h1 { font-size: 1.5rem; }
+
+            .sidebar {
+                display: flex;
+                overflow-x: auto;
+                padding: var(--space-s);
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-tab {
+                width: auto;
+                white-space: nowrap;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+
+            .nav-tab.active {
+                border-left: none;
+                border-bottom-color: var(--brand-orange);
+            }
+
+            .grid-cols-2,
+            .grid-cols-3 {
+                grid-template-columns: 1fr !important;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ==================== APP CONTAINER ==================== -->
@@ -208,10 +422,10 @@
         const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString();
         // Utility: Format Time
         const formatTime = (dateStr) => {
-            if(!dateStr) return '--:--';
+            if (!dateStr) return '--:--';
             return new Date(dateStr).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
         };
-        const formatDecimal = (num) =>  parseFloat(num).toFixed(2);
+        const formatDecimal = (num) => parseFloat(num).toFixed(2);
 
         // --- 2. STATE MANAGEMENT ---
         class Store {
@@ -233,12 +447,27 @@
             getInitialMockData() {
                 // Generate 20 volunteers
                 const volunteers = [
-                    { id: 'v1', name: 'Michael Tran', email: 'michael@example.com', totalHours: 14, creditsUsed: 0, 
-                      history: [
-                          { id: 's1', race: 'Rocky 100', date: '2026-01-15', hours: 3.5, status: 'completed' },
-                          { id: 's2', race: 'Bandera 100K', date: '2025-12-01', hours: 7.5, status: 'completed' },
-                          { id: 's3', race: 'Rocky 100', date: '2025-11-10', hours: 3.0, status: 'completed' }
-                      ]
+                    // Stakeholder: Dave
+                    {
+                        id: 'v-dave', name: 'Dave Smithey', email: 'dave@tejastrails.com', totalHours: 120, creditsUsed: 0,
+                        history: [
+                            { id: 'h1', race: 'Rocky 100', date: '2025-02-07', hours: 12.0, status: 'completed' }
+                        ]
+                    },
+                    // Stakeholder: Brooke
+                    {
+                        id: 'v-brooke', name: 'Brooke Berg', email: 'brooke@tejastrails.com', totalHours: 150, creditsUsed: 20,
+                        history: [
+                            { id: 'h2', race: 'Bandera 100K', date: '2025-01-06', hours: 14.5, status: 'completed' }
+                        ]
+                    },
+                    {
+                        id: 'v1', name: 'Michael Tran', email: 'michael@example.com', totalHours: 14, creditsUsed: 0,
+                        history: [
+                            { id: 's1', race: 'Rocky 100', date: '2026-01-15', hours: 3.5, status: 'completed' },
+                            { id: 's2', race: 'Bandera 100K', date: '2025-12-01', hours: 7.5, status: 'completed' },
+                            { id: 's3', race: 'Rocky 100', date: '2025-11-10', hours: 3.0, status: 'completed' }
+                        ]
                     },
                     { id: 'v2', name: 'Sarah Johnson', email: 'sarah@example.com', totalHours: 48, creditsUsed: 0, history: [] },
                     { id: 'v3', name: 'James Lee', email: 'james@example.com', totalHours: 3, creditsUsed: 0, history: [] },
@@ -247,7 +476,7 @@
                 const firstNames = ['David', 'Emma', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack', 'Kelly', 'Liam', 'Mia', 'Noah', 'Olivia', 'Paul', 'Quinn', 'Ryan', 'Sofia', 'Tom'];
                 firstNames.forEach((n, i) => {
                     volunteers.push({
-                        id: `v${i+4}`,
+                        id: `v${i + 4}`,
                         name: `${n} Volunteer`,
                         email: `${n.toLowerCase()}@example.com`,
                         totalHours: Math.floor(Math.random() * 50),
@@ -295,7 +524,7 @@
 
                 // Add to history
                 const vol = this.state.volunteers.find(v => v.id === volunteerId);
-                if(vol) {
+                if (vol) {
                     vol.totalHours += hours;
                     vol.history.unshift({
                         id: generateId(),
@@ -309,7 +538,7 @@
                 // Remove from checkins
                 this.state.checkins.splice(idx, 1);
                 this.saveState();
-                
+
                 return { success: true, hours: hours };
             }
 
@@ -319,7 +548,7 @@
 
             redeemCredits(volunteerId, cost) {
                 const vol = this.state.volunteers.find(v => v.id === volunteerId);
-                if(!vol) return;
+                if (!vol) return;
                 // In a real system we might deduct 'available' hours, here we just track usages or deduct total?
                 // Spec says "0 hours remaining", so let's deduct.
                 if (vol.totalHours >= cost) {
@@ -339,7 +568,7 @@
 
         function render() {
             app.innerHTML = '';
-            
+
             if (appState.currentView === 'login') {
                 renderLogin();
             } else if (appState.currentView === 'dashboard') {
@@ -354,15 +583,19 @@
             const container = document.createElement('div');
             container.className = 'container flex flex-col items-center justify-center';
             container.style.height = '100vh';
-            
+
             container.innerHTML = `
                 <div class="text-center mb-4">
                     <h1 class="mb-4">TEJAS TRAILS</h1>
                     <p class="text-xl">Volunteer Management Portal</p>
                 </div>
                 <div class="card flex flex-col gap-4" style="width: 100%; max-width: 400px;">
-                    <button class="btn btn-primary btn-lg" onclick="handleLogin('volunteer')">I'm a Volunteer</button>
-                    <button class="btn btn-secondary btn-lg" onclick="handleLogin('admin')">I'm an Admin</button>
+                    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <button class="btn btn-secondary btn-sm" onclick="handleLogin('dave')">Login as Dave</button>
+                        <button class="btn btn-secondary btn-sm" onclick="handleLogin('brooke')">Login as Brooke</button>
+                    </div>
+                    <button class="btn btn-primary btn-lg" onclick="handleLogin('volunteer')">Login as Volunteer</button>
+                    <button class="btn btn-secondary btn-lg" onclick="handleLogin('admin')">Access Admin Panel</button>
                     <div class="text-center mt-4">
                         <a href="#" class="text-secondary" style="color:#888; text-decoration:none;">View Upcoming Races</a>
                     </div>
@@ -379,7 +612,7 @@
             // Layout
             const layout = document.createElement('div');
             layout.className = 'container dashboard-layout';
-            
+
             // Sidebar
             layout.innerHTML = `
                 <aside class="sidebar">
@@ -392,7 +625,7 @@
                     <!-- Dynamic Content Loaded Here -->
                 </main>
             `;
-            
+
             app.appendChild(layout);
             renderVolunteerHome(); // Default tab
         }
@@ -417,7 +650,7 @@
             const main = document.getElementById('main-content');
             const vol = appState.currentUser;
             const isCheckedIn = appState.state.checkins.find(c => c.volunteerId === vol.id);
-            
+
             // Calc eligibility
             const nextTier = CONFIG.tiers.find(t => t.min > vol.totalHours);
             const currentTier = [...CONFIG.tiers].reverse().find(t => t.min <= vol.totalHours);
@@ -430,13 +663,13 @@
                     <div class="card text-center">
                         <p class="text-secondary text-sm font-bold uppercase tracking-wider">Current Status</p>
                         <div class="mt-4 mb-4">
-                            ${isCheckedIn 
-                                ? `<div class="text-green font-bold text-xl mb-2">Checked In</div>
+                            ${isCheckedIn
+                    ? `<div class="text-green font-bold text-xl mb-2">Checked In</div>
                                    <p class="text-sm">Started at ${formatTime(isCheckedIn.startTime)}</p>
-                                   <div class="mt-4 animate-pulse text-brand-blue">Session active...</div>` 
-                                : `<div class="text-secondary font-bold text-xl mb-2">Not Checked In</div>
+                                   <div class="mt-4 animate-pulse text-brand-blue">Session active...</div>`
+                    : `<div class="text-secondary font-bold text-xl mb-2">Not Checked In</div>
                                    <p class="text-sm">Ready to start your shift?</p>`
-                            }
+                }
                         </div>
                         <button class="btn ${isCheckedIn ? 'btn-secondary' : 'btn-primary'} w-full" 
                             onclick="${isCheckedIn ? 'doCheckOut()' : 'doCheckIn()'}"
@@ -466,7 +699,7 @@
                         <table>
                             <thead><tr><th>Race</th><th>Date</th><th>Location</th></tr></thead>
                             <tbody>
-                                ${appState.state.races.slice(0,3).map(r => `
+                                ${appState.state.races.slice(0, 3).map(r => `
                                     <tr>
                                         <td class="font-bold">${r.name}</td>
                                         <td>${formatDate(r.date)}</td>
@@ -532,8 +765,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            ${vol.history.length === 0 ? '<tr><td colspan="4" class="text-center p-4">No history yet.</td></tr>' : 
-                                vol.history.map(s => `
+                            ${vol.history.length === 0 ? '<tr><td colspan="4" class="text-center p-4">No history yet.</td></tr>' :
+                    vol.history.map(s => `
                                     <tr>
                                         <td>${formatDate(s.date)}</td>
                                         <td>${s.race}</td>
@@ -541,7 +774,7 @@
                                         <td><span class="badge badge-green">${s.status}</span></td>
                                     </tr>
                                 `).join('')
-                            }
+                }
                         </tbody>
                     </table>
                 </div>
@@ -551,10 +784,10 @@
         // --- ADMIN DASHBOARD ---
         function renderAdminLayout() {
             renderNavbar('Admin Portal', 'Control Center');
-             // Layout
-             const layout = document.createElement('div');
+            // Layout
+            const layout = document.createElement('div');
             layout.className = 'container dashboard-layout';
-            
+
             // Sidebar
             layout.innerHTML = `
                 <aside class="sidebar">
@@ -574,14 +807,14 @@
             const main = document.getElementById('main-content');
             const checkedInCount = appState.state.checkins.length;
             const totalVols = appState.state.volunteers.length;
-            
+
             main.innerHTML = `
                 <h2>Dashboard Overview</h2>
                 <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
                     <div class="card">
                         <p class="text-sm font-bold uppercase text-secondary">Checked In</p>
                         <div class="text-4xl font-bold text-white mt-2">${checkedInCount} / ${totalVols}</div>
-                        <div class="progress-bar mt-4"><div class="progress-fill" style="width: ${(checkedInCount/totalVols)*100}%"></div></div>
+                        <div class="progress-bar mt-4"><div class="progress-fill" style="width: ${(checkedInCount / totalVols) * 100}%"></div></div>
                     </div>
                      <div class="card">
                         <p class="text-sm font-bold uppercase text-secondary">Total Debt (Hours)</p>
@@ -597,18 +830,18 @@
                          <table>
                             <thead><tr><th>Name</th><th>Check-in Time</th><th>Action</th></tr></thead>
                             <tbody>
-                                ${appState.state.checkins.length === 0 ? '<tr><td colspan="3" class="text-center p-4">No active check-ins.</td></tr>' : 
-                                    appState.state.checkins.map(c => {
-                                        const v = appState.state.volunteers.find(vol => vol.id === c.volunteerId);
-                                        return `
+                                ${appState.state.checkins.length === 0 ? '<tr><td colspan="3" class="text-center p-4">No active check-ins.</td></tr>' :
+                    appState.state.checkins.map(c => {
+                        const v = appState.state.volunteers.find(vol => vol.id === c.volunteerId);
+                        return `
                                             <tr>
                                                 <td class="font-bold">${v ? v.name : 'Unknown'}</td>
                                                 <td>${formatTime(c.startTime)}</td>
                                                 <td><span class="badge badge-green">Active</span></td>
                                             </tr>
                                         `;
-                                    }).join('')
-                                }
+                    }).join('')
+                }
                             </tbody>
                         </table>
                     </div>
@@ -618,7 +851,7 @@
 
         function renderAdminVolunteers() {
             const main = document.getElementById('main-content');
-             main.innerHTML = `
+            main.innerHTML = `
                 <div class="flex justify-between items-center mb-4">
                     <h2>All Volunteers</h2>
                     <input type="text" placeholder="Search volunteers..." class="input-field" style="width:200px" onkeyup="filterTable(this)">
@@ -651,12 +884,18 @@
 
         // --- 4. INTERACTION HANDLERS ---
         window.handleLogin = (type) => {
-            if (type === 'volunteer') {
-                // For demo, pick Michael Tran
-                appState.currentUser = appState.state.volunteers[0];
+            if (type === 'dave') {
+                appState.currentUser = appState.state.volunteers.find(v => v.id === 'v-dave');
+                appState.currentView = 'dashboard';
+            } else if (type === 'brooke') {
+                appState.currentUser = appState.state.volunteers.find(v => v.id === 'v-brooke');
+                appState.currentView = 'dashboard';
+            } else if (type === 'volunteer') {
+                // For demo, pick Michael Tran (or whoever is 3rd now)
+                appState.currentUser = appState.state.volunteers[2];
                 appState.currentView = 'dashboard';
             } else {
-                appState.currentUser = { name: 'Dave' }; // Dummy admin
+                appState.currentUser = { name: 'Admin User' };
                 appState.currentView = 'admin';
             }
             render();
@@ -683,7 +922,7 @@
 
         window.doCheckIn = () => {
             const res = appState.checkIn(appState.currentUser.id);
-            if(res.success) {
+            if (res.success) {
                 alert('Checked in successfully!');
                 renderVolunteerHome(); // re-render
             }
@@ -691,15 +930,15 @@
 
         window.doCheckOut = () => {
             const res = appState.checkOut(appState.currentUser.id);
-            if(res.success) {
+            if (res.success) {
                 alert(`Checked out! You earned ${formatDecimal(res.hours)} hours.`);
                 renderVolunteerHome();
             }
         };
 
         window.requestRedemption = (val) => {
-            if(confirm(`Use ${val} hours to redeem this reward?`)) {
-                if(appState.redeemCredits(appState.currentUser.id, val)) {
+            if (confirm(`Use ${val} hours to redeem this reward?`)) {
+                if (appState.redeemCredits(appState.currentUser.id, val)) {
                     alert('Credits redeemed! Admin will contact you.');
                     renderVolunteerCredits();
                 } else {
@@ -721,7 +960,7 @@
                     } else {
                         trs[i].style.display = "none";
                     }
-                }       
+                }
             }
         };
 
@@ -729,4 +968,5 @@
         render(); // Start
     </script>
 </body>
+
 </html>

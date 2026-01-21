@@ -153,7 +153,37 @@ export function generateGhostData() {
         history: ['Rocky Raccoon 2024'],
         distanceFromVenue: 12
     };
-    volunteers.push(michael);
+    // Stakeholder 1: Dave Smithey
+    const dave: Volunteer = {
+        id: 'v-dave-smithey',
+        firstName: 'Dave',
+        lastName: 'Smithey',
+        name: 'Dave Smithey',
+        email: 'dave@tejastrails.com', // Demo email
+        phone: '555-DAVE',
+        reliabilityScore: 100,
+        experience_level: 'expert',
+        history: ['All Races Ever'],
+        distanceFromVenue: 0,
+        riskScore: 0
+    };
+    // Stakeholder 2: Brooke Berg
+    const brooke: Volunteer = {
+        id: 'v-brooke-berg',
+        firstName: 'Brooke',
+        lastName: 'Berg',
+        name: 'Brooke Berg',
+        email: 'brooke@tejastrails.com',
+        phone: '555-BRKE',
+        reliabilityScore: 100,
+        experience_level: 'expert',
+        history: ['Logistics Queen'],
+        distanceFromVenue: 0,
+        riskScore: 0
+    };
+
+    // Add stakeholders FIRST so they appear at top of lists
+    volunteers.push(dave, brooke, michael);
 
     // 69 more volunteers
     for (let i = 1; i <= 69; i++) {
@@ -202,6 +232,28 @@ export function generateGhostData() {
         startTime: assignments[1].startTime,
         endTime: assignments[1].endTime,
         role: 'Crew',
+        status: 'confirmed'
+    });
+
+    // Dave Smithey Assignment: Friday Packet Pickup
+    assignments.push({
+        id: 'a-dave-1',
+        volunteerId: 'v-dave-smithey',
+        station: 'Packet Pickup',
+        startTime: new Date('2026-02-06T12:00:00'), // Friday 12pm
+        endTime: new Date('2026-02-06T18:00:00'),   // Friday 6pm
+        role: 'General Manager',
+        status: 'confirmed'
+    });
+
+    // Brooke Berg Assignment: Aid Station 1
+    assignments.push({
+        id: 'a-brooke-1',
+        volunteerId: 'v-brooke-berg',
+        station: 'Dam Nation (AS1)',
+        startTime: new Date('2026-02-06T14:00:00'), // Friday 2pm
+        endTime: new Date('2026-02-06T22:00:00'),   // Friday 10pm
+        role: 'Logistics Manager',
         status: 'confirmed'
     });
 

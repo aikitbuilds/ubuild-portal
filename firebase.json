@@ -8,6 +8,12 @@
         ],
         "cleanUrls": true,
         "trailingSlash": true,
+        "rewrites": [
+            {
+                "source": "/tejas-portal",
+                "destination": "/tejas-portal.html"
+            }
+        ],
         "headers": [
             {
                 "source": "**",
@@ -17,56 +23,6 @@
                         "value": "no-cache, no-store, must-revalidate"
                     }
                 ]
-            }
-        ],
-        "rewrites": [
-            {
-                "source": "/tejas-portal",
-                "destination": "/tejas-portal.html"
-            },
-            {
-                "source": "/tejas-portal.html",
-                "destination": "/tejas-portal.html"
-            },
-            {
-                "source": "/tejas/dashboard",
-                "destination": "/tejas/dashboard/index.html"
-            },
-            {
-                "source": "/tejas/checkin",
-                "destination": "/tejas/checkin/index.html"
-            },
-            {
-                "source": "/tejas/volunteer-hub",
-                "destination": "/tejas/volunteer-hub/index.html"
-            },
-            {
-                "source": "/tejas/vol",
-                "destination": "/tejas/vol/index.html"
-            },
-            {
-                "source": "/dashboard",
-                "destination": "/dashboard/index.html"
-            },
-            {
-                "source": "/dashboard/**",
-                "destination": "/dashboard/index.html"
-            },
-            {
-                "source": "/start",
-                "destination": "/start/index.html"
-            },
-            {
-                "source": "/project",
-                "destination": "/project/index.html"
-            },
-            {
-                "source": "/login",
-                "destination": "/login/index.html"
-            },
-            {
-                "source": "**",
-                "destination": "/index.html"
             }
         ]
     },
