@@ -42,4 +42,6 @@ export const collections = {
     buildTasks: db.collection('build_tasks'),
     issues: db.collection('issues'),
     logs: db.collection('logs'),
+    volunteers: db.collection('volunteers'),
+    assignments: db.collection('assignments'),
 };

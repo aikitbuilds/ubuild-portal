@@ -24,8 +24,8 @@ export function SystemHealth({ data, healthPercent }: SystemHealthProps) {
                 <CardTitle className="text-lg font-semibold">System Health</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="relative h-[200px]">
-                    <ResponsiveContainer width="100%" height="100%">
+                <div className="relative h-[200px] w-full min-w-0">
+                    <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                         <PieChart>
                             <Pie
                                 data={data}

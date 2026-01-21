@@ -1,0 +1,135 @@
+
+> ubuild-portal@0.1.0 build
+> next build
+
+ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\aikit\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\aikit\Documents\Active Projects\ubuild\ubuild-portal\package-lock.json
+   * C:\Users\aikit\Documents\Active Projects\ubuild\pnpm-lock.yaml
+
+Γû▓ Next.js 16.1.3 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 16.0s
+  Running TypeScript ...
+  Collecting page data using 15 workers ...
+[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ≡ƒöæ add access controls to secrets: https://dotenvx.com/ops
+  Generating static pages using 15 workers (0/24) ...
+[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /blog/[slug]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /blog/[slug]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /blog/[slug]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /blog/[slug]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /blog/[slug]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /blog/[slug]. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+  Generating static pages using 15 workers (6/24) 
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /blog. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /blog. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /dashboard/new. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /dashboard/new. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /dashboard/payments. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /dashboard/payments. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /dashboard/submission. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /dashboard/submission. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+  Generating static pages using 15 workers (12/24) 
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /project. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /project. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /start. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /start. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /tejas/checkin. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /tejas/checkin. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /tejas/volunteer-hub. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /tejas/volunteer-hub. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /volunteer/dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /volunteer/dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /volunteer/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /volunteer/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /tejas/vol. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /tejas/vol. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata themeColor is configured in metadata export in /tejas/dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ΓÜá Unsupported metadata viewport is configured in metadata export in /tejas/dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+  Generating static pages using 15 workers (18/24) 
+Γ£ô Generating static pages using 15 workers (24/24) in 1146.2ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /api/tejas/checkin
+Γö£ ╞Æ /api/tejas/report-issue
+Γö£ ╞Æ /api/tejas/sync
+Γö£ Γùï /blog
+Γö£ ΓùÅ /blog/[slug]
+Γöé Γö£ /blog/what-is-ai-simple-guide
+Γöé Γö£ /blog/how-to-start-using-ai-tools
+Γöé Γöö /blog/is-ai-safe-ethical-guide
+Γö£ Γùï /dashboard
+Γö£ Γùï /dashboard/new
+Γö£ Γùï /dashboard/payments
+Γö£ Γùï /dashboard/submission
+Γö£ Γùï /login
+Γö£ Γùï /project
+Γö£ Γùï /start
+Γö£ Γùï /tejas/checkin
+Γö£ Γùï /tejas/dashboard
+Γö£ Γùï /tejas/vol
+Γö£ Γùï /tejas/volunteer-hub
+Γö£ Γùï /volunteer/dashboard
+Γöö Γùï /volunteer/login
+
+
+Γùï  (Static)   prerendered as static content
+ΓùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+╞Æ  (Dynamic)  server-rendered on demand
+

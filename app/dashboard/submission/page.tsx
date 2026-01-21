@@ -92,16 +92,12 @@ export default function SmartSubmissionPage() {
         setIsRefining(true);
 
         try {
-            const res = await fetch("/api/agency/refine", {
-                method: "POST",
-                body: JSON.stringify({ input: rawInput }),
-            });
-            const data = await res.json();
+            // Client-side simulation
+            const { refineRequirements } = await import("@/lib/agency/client-ops");
+            const refined = await refineRequirements(rawInput);
 
-            if (data.refined) {
-                setRefinedBrief(data.refined);
-                setStep(3);
-            }
+            setRefinedBrief(refined);
+            setStep(3);
         } catch (error) {
             console.error(error);
             toast.error("Error", { description: "Failed to refine input." });
@@ -123,18 +119,11 @@ export default function SmartSubmissionPage() {
                 aiAnalysis: refinedBrief,
             };
 
-            const res = await fetch("/api/agency/submit", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(submissionPayload),
-            });
+            const { submitProjectRequest } = await import("@/lib/agency/client-ops");
+            await submitProjectRequest(submissionPayload);
 
-            if (res.ok) {
-                setIsComplete(true);
-                toast.success("Success", { description: "Request submitted successfully!" });
-            } else {
-                throw new Error("Submission failed");
-            }
+            setIsComplete(true);
+            toast.success("Success", { description: "Request submitted successfully!" });
         } catch (error) {
             console.error(error);
             toast.error("Error", { description: "Failed to submit request." });

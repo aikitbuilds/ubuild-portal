@@ -1,5 +1,8 @@
 "use client";
 
+import { httpsCallable } from "firebase/functions";
+import { functions } from "@/lib/firebase/client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -30,24 +33,27 @@ export function BuildCoPilot({ projectId, currentStage }: { projectId: string, c
         setIsLoading(true);
 
         try {
-            const res = await fetch("/api/agency/chat/private", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    message: userMsg,
-                    projectId,
-                    currentStage
-                }),
-            });
-            const data = await res.json();
+            const performResearch = httpsCallable(functions, 'performResearch');
+            const result = await performResearch({ query: userMsg });
 
-            if (data.response) {
-                setMessages((prev) => [...prev, { role: "agent", content: data.response }]);
-            } else {
-                setMessages((prev) => [...prev, { role: "agent", content: "Error: Protocol Failure." }]);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const data: any = result.data;
+            let responseText = "Research completed.";
+
+            if (data.refined) {
+                // Format the structured response into a readable message
+                const { objective, features, successMetrics, suggestedStack } = data.refined;
+                responseText = `**Objective:** ${objective}\n\n` +
+                    `**Key Features:**\n${features?.map((f: string) => `- ${f}`).join('\n')}\n\n` +
+                    `**Stack:** ${suggestedStack}`;
+            } else if (data.response) {
+                responseText = data.response;
             }
+
+            setMessages((prev) => [...prev, { role: "agent", content: responseText }]);
         } catch (err) {
-            setMessages((prev) => [...prev, { role: "agent", content: "Connection Lost." }]);
+            console.error("Agent Error:", err);
+            setMessages((prev) => [...prev, { role: "agent", content: "Error: Connection to Agency Brain failed. Please try again." }]);
         } finally {
             setIsLoading(false);
         }

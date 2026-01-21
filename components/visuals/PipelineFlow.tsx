@@ -10,12 +10,13 @@ interface PipelineFlowProps {
 }
 
 // The 5 stages from IDEA_TO_MVP_WORKFLOW_v2.md
+// The 5 stages from IDEA_TO_MVP_WORKFLOW_v2.md - Ultra Branded
 const stages = [
-    { id: 1, name: "Research", icon: Search, description: "Market & Tech Validation" },
-    { id: 2, name: "Architect", icon: Layers, description: "System Design & Schema" },
-    { id: 3, name: "Build", icon: Hammer, description: "Parallel Agent Execution" },
-    { id: 4, name: "Optimize", icon: Zap, description: "Performance & Security" },
-    { id: 5, name: "Deploy", icon: Rocket, description: "Production & Monitoring" },
+    { id: 1, name: "Route Planning", icon: Search, description: "Market & Tech Validation" },
+    { id: 2, name: "Gear Check", icon: Layers, description: "System Design & Schema" },
+    { id: 3, name: "The Long Run", icon: Hammer, description: "Parallel Agent Execution" },
+    { id: 4, name: "Aid Station", icon: Zap, description: "Refinement & Debugging" },
+    { id: 5, name: "Finish Line", icon: Rocket, description: "Production Deployment" },
 ];
 
 export function PipelineFlow({ className }: PipelineFlowProps) {

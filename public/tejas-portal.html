@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tejas Trails Volunteer Portal</title>
+    <style>
+        :root {
+            /* Colors */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-input: #2C2C2C;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --brand-orange: #FF8C00;
+            --brand-orange-hover: #E07B00;
+            --brand-blue: #2196F3;
+            --status-green: #4CAF50;
+            --status-red: #F44336;
+            --status-yellow: #FFC107;
+            --border-color: #333333;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-s: 8px;
+            --space-m: 16px;
+            --space-l: 24px;
+            --space-xl: 32px;
+
+            /* Typography */
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-size-base: 16px;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.5rem;
+            --font-size-xxl: 2rem;
+        }
+
+        /* Reset & Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout Utilities */
+        .container { max-width: 1200px; margin: 0 auto; padding: var(--space-m); width: 100%; }
+        .grid { display: grid; gap: var(--space-m); }
+        .flex { display: flex; gap: var(--space-m); }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .w-full { width: 100%; }
+        .mt-4 { margin-top: var(--space-m); }
+        .mb-4 { margin-bottom: var(--space-m); }
+
+        /* Typography */
+        h1 { font-size: var(--font-size-xxl); font-weight: 800; color: var(--brand-orange); }
+        h2 { font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--space-m); }
+        h3 { font-size: var(--font-size-lg); font-weight: 600; margin-bottom: var(--space-s); }
+        p { color: var(--text-secondary); margin-bottom: var(--space-s); }
+        .val-highlight { color: var(--text-primary); font-weight: bold; }
+        .text-orange { color: var(--brand-orange); }
+        .text-green { color: var(--status-green); }
+        .text-red { color: var(--status-red); }
+
+        /* Components */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        .btn-primary { background-color: var(--brand-orange); color: white; }
+        .btn-primary:hover { background-color: var(--brand-orange-hover); transform: translateY(-1px); }
+        .btn-secondary { background-color: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background-color: #333; }
+        .btn-lg { padding: 16px 32px; font-size: 1.25rem; width: 100%; }
+        .btn-sm { padding: 8px 16px; font-size: 0.875rem; }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: var(--space-l);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .input-group { margin-bottom: var(--space-m); text-align: left; }
+        .input-group label { display: block; margin-bottom: var(--space-xs); font-size: 0.875rem; color: var(--text-secondary); }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+        .input-field:focus { outline: 2px solid var(--brand-orange); border-color: transparent; }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space-m) 0;
+        }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; }
+        
+        /* Dashboard Layout */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: var(--space-l);
+            height: calc(100vh - 73px); /* Navbar height approx */
+        }
+        .sidebar { padding: var(--space-l) 0; border-right: 1px solid var(--border-color); }
+        .nav-tab {
+            width: 100%;
+            text-align: left;
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+        .nav-tab:hover { color: var(--brand-orange); background-color: rgba(255, 140, 0, 0.05); }
+        .nav-tab.active { color: var(--brand-orange); border-left-color: var(--brand-orange); background-color: rgba(255, 140, 0, 0.1); }
+
+        .content-area { padding: var(--space-l); overflow-y: auto; }
+
+        /* Tables */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { text-align: left; padding: 12px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase; }
+        td { padding: 12px; border-bottom: 1px solid var(--border-color); }
+        tr:hover { background-color: rgba(255,255,255,0.02); }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-green { background-color: rgba(76, 175, 80, 0.1); color: var(--status-green); }
+        .badge-red { background-color: rgba(244, 67, 54, 0.1); color: var(--status-red); }
+        .badge-yellow { background-color: rgba(255, 193, 7, 0.1); color: var(--status-yellow); }
+
+        /* Progress Bar */
+        .progress-bar { height: 8px; background-color: var(--bg-input); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+        .progress-fill { height: 100%; background-color: var(--brand-blue); border-radius: 4px; transition: width 0.3s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-layout { grid-template-columns: 1fr; height: auto; }
+            .sidebar { 
+                display: flex; overflow-x: auto; padding: var(--space-s); 
+                border-right: none; border-bottom: 1px solid var(--border-color);
+            }
+            .nav-tab { width: auto; white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
+            .nav-tab.active { border-left: none; border-bottom-color: var(--brand-orange); }
+            .grid-cols-2, .grid-cols-3 { grid-template-columns: 1fr !important; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== APP CONTAINER ==================== -->
+    <div id="app"></div>
+
+    <!-- ==================== LOGIC ==================== -->
+    <script>
+        // --- 1. CONFIG & UTILS ---
+        const CONFIG = {
+            brandName: 'Tejas Trails',
+            tiers: [
+                { min: 6, max: 11, reward: '50% off 25km (or shorter)' },
+                { min: 12, max: 23, reward: 'Free 50km (or shorter)' },
+                { min: 24, max: 47, reward: 'Free 100km (or shorter)' },
+                { min: 48, max: 999, reward: 'Free 100-miler (or shorter)' }
+            ]
+        };
+
+        // Utility: Generate ID
+        const generateId = () => Math.random().toString(36).substr(2, 9);
+        // Utility: Format Date
+        const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString();
+        // Utility: Format Time
+        const formatTime = (dateStr) => {
+            if(!dateStr) return '--:--';
+            return new Date(dateStr).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        };
+        const formatDecimal = (num) =>  parseFloat(num).toFixed(2);
+
+        // --- 2. STATE MANAGEMENT ---
+        class Store {
+            constructor() {
+                this.state = this.loadState() || this.getInitialMockData();
+                this.currentUser = null;
+                this.currentView = 'login'; // login, dashboard, admin
+            }
+
+            saveState() {
+                localStorage.setItem('tejasPortalState', JSON.stringify(this.state));
+            }
+
+            loadState() {
+                const saved = localStorage.getItem('tejasPortalState');
+                return saved ? JSON.parse(saved) : null;
+            }
+
+            getInitialMockData() {
+                // Generate 20 volunteers
+                const volunteers = [
+                    { id: 'v1', name: 'Michael Tran', email: 'michael@example.com', totalHours: 14, creditsUsed: 0, 
+                      history: [
+                          { id: 's1', race: 'Rocky 100', date: '2026-01-15', hours: 3.5, status: 'completed' },
+                          { id: 's2', race: 'Bandera 100K', date: '2025-12-01', hours: 7.5, status: 'completed' },
+                          { id: 's3', race: 'Rocky 100', date: '2025-11-10', hours: 3.0, status: 'completed' }
+                      ]
+                    },
+                    { id: 'v2', name: 'Sarah Johnson', email: 'sarah@example.com', totalHours: 48, creditsUsed: 0, history: [] },
+                    { id: 'v3', name: 'James Lee', email: 'james@example.com', totalHours: 3, creditsUsed: 0, history: [] },
+                ];
+                // Add filler data
+                const firstNames = ['David', 'Emma', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack', 'Kelly', 'Liam', 'Mia', 'Noah', 'Olivia', 'Paul', 'Quinn', 'Ryan', 'Sofia', 'Tom'];
+                firstNames.forEach((n, i) => {
+                    volunteers.push({
+                        id: `v${i+4}`,
+                        name: `${n} Volunteer`,
+                        email: `${n.toLowerCase()}@example.com`,
+                        totalHours: Math.floor(Math.random() * 50),
+                        creditsUsed: 0,
+                        history: []
+                    });
+                });
+
+                return {
+                    volunteers,
+                    checkins: [], // Active checkins: { volunteerId, startTime, raceId }
+                    logs: [], // Completed sessions
+                    races: [
+                        { id: 'r1', name: 'Rocky Raccoon 100', date: '2026-02-07' },
+                        { id: 'r2', name: 'HOKA Bandera 100K', date: '2026-02-28' },
+                        { id: 'r3', name: 'Rocky Raccoon 50', date: '2026-02-08' },
+                        { id: 'r4', name: 'Snowdrop 50K', date: '2026-03-01' },
+                        { id: 'r5', name: 'Rocky 25K', date: '2026-03-15' }
+                    ]
+                };
+            }
+
+            // Actions
+            checkIn(volunteerId) {
+                const existing = this.state.checkins.find(c => c.volunteerId === volunteerId);
+                if (existing) return { success: false, message: 'Already checked in' };
+
+                this.state.checkins.push({
+                    volunteerId,
+                    startTime: new Date().toISOString(),
+                    raceId: 'r1' // Defaulting to current race for demo
+                });
+                this.saveState();
+                return { success: true };
+            }
+
+            checkOut(volunteerId) {
+                const idx = this.state.checkins.findIndex(c => c.volunteerId === volunteerId);
+                if (idx === -1) return { success: false, message: 'Not checked in' };
+
+                const session = this.state.checkins[idx];
+                const endTime = new Date();
+                const startTime = new Date(session.startTime);
+                const hours = (endTime - startTime) / (1000 * 60 * 60); // decimal hours
+
+                // Add to history
+                const vol = this.state.volunteers.find(v => v.id === volunteerId);
+                if(vol) {
+                    vol.totalHours += hours;
+                    vol.history.unshift({
+                        id: generateId(),
+                        race: 'Rocky Raccoon 100 (Live)',
+                        date: new Date().toISOString().split('T')[0],
+                        hours: hours,
+                        status: 'completed'
+                    });
+                }
+
+                // Remove from checkins
+                this.state.checkins.splice(idx, 1);
+                this.saveState();
+                
+                return { success: true, hours: hours };
+            }
+
+            getRedemptionOptions(hours) {
+                return CONFIG.tiers.filter(t => hours >= t.min);
+            }
+
+            redeemCredits(volunteerId, cost) {
+                const vol = this.state.volunteers.find(v => v.id === volunteerId);
+                if(!vol) return;
+                // In a real system we might deduct 'available' hours, here we just track usages or deduct total?
+                // Spec says "0 hours remaining", so let's deduct.
+                if (vol.totalHours >= cost) {
+                    vol.totalHours -= cost;
+                    vol.creditsUsed += cost;
+                    this.saveState();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        const appState = new Store();
+
+        // --- 3. UI RENDERING ---
+        const app = document.getElementById('app');
+
+        function render() {
+            app.innerHTML = '';
+            
+            if (appState.currentView === 'login') {
+                renderLogin();
+            } else if (appState.currentView === 'dashboard') {
+                renderDashboardLayout();
+            } else if (appState.currentView === 'admin') {
+                renderAdminLayout();
+            }
+        }
+
+        // --- LOGIN VIEW ---
+        function renderLogin() {
+            const container = document.createElement('div');
+            container.className = 'container flex flex-col items-center justify-center';
+            container.style.height = '100vh';
+            
+            container.innerHTML = `
+                <div class="text-center mb-4">
+                    <h1 class="mb-4">TEJAS TRAILS</h1>
+                    <p class="text-xl">Volunteer Management Portal</p>
+                </div>
+                <div class="card flex flex-col gap-4" style="width: 100%; max-width: 400px;">
+                    <button class="btn btn-primary btn-lg" onclick="handleLogin('volunteer')">I'm a Volunteer</button>
+                    <button class="btn btn-secondary btn-lg" onclick="handleLogin('admin')">I'm an Admin</button>
+                    <div class="text-center mt-4">
+                        <a href="#" class="text-secondary" style="color:#888; text-decoration:none;">View Upcoming Races</a>
+                    </div>
+                </div>
+            `;
+            app.appendChild(container);
+        }
+
+        // --- VOLUNTEER DASHBOARD ---
+        function renderDashboardLayout() {
+            // Navbar
+            renderNavbar('Volunteer Portal', 'Dashboard');
+
+            // Layout
+            const layout = document.createElement('div');
+            layout.className = 'container dashboard-layout';
+            
+            // Sidebar
+            layout.innerHTML = `
+                <aside class="sidebar">
+                    <button class="nav-tab active" onclick="switchTab(this, 'home')">Home</button>
+                    <button class="nav-tab" onclick="switchTab(this, 'credits')">My Credits</button>
+                    <button class="nav-tab" onclick="switchTab(this, 'history')">History</button>
+                    <button class="nav-tab" onclick="logout()" style="margin-top:auto; color: var(--status-red);">Sign Out</button>
+                </aside>
+                <main class="content-area" id="main-content">
+                    <!-- Dynamic Content Loaded Here -->
+                </main>
+            `;
+            
+            app.appendChild(layout);
+            renderVolunteerHome(); // Default tab
+        }
+
+        function renderNavbar(title, subtitle) {
+            const nav = document.createElement('nav');
+            nav.className = 'navbar';
+            nav.innerHTML = `
+                <div class="container nav-content">
+                    <div class="nav-logo">
+                        <span style="color:var(--brand-orange)">TEJAS</span>TRAILS
+                        <span style="font-weight:400; color:var(--text-secondary); margin-left:10px;">| &nbsp; ${title}</span>
+                    </div>
+                    <div>${appState.currentUser ? appState.currentUser.name : ''}</div>
+                </div>
+            `;
+            app.appendChild(nav);
+        }
+
+        // Tab Views for Volunteer
+        function renderVolunteerHome() {
+            const main = document.getElementById('main-content');
+            const vol = appState.currentUser;
+            const isCheckedIn = appState.state.checkins.find(c => c.volunteerId === vol.id);
+            
+            // Calc eligibility
+            const nextTier = CONFIG.tiers.find(t => t.min > vol.totalHours);
+            const currentTier = [...CONFIG.tiers].reverse().find(t => t.min <= vol.totalHours);
+
+            main.innerHTML = `
+                <h2>Welcome back, ${vol.name.split(' ')[0]}!</h2>
+                
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <!-- Status Card -->
+                    <div class="card text-center">
+                        <p class="text-secondary text-sm font-bold uppercase tracking-wider">Current Status</p>
+                        <div class="mt-4 mb-4">
+                            ${isCheckedIn 
+                                ? `<div class="text-green font-bold text-xl mb-2">Checked In</div>
+                                   <p class="text-sm">Started at ${formatTime(isCheckedIn.startTime)}</p>
+                                   <div class="mt-4 animate-pulse text-brand-blue">Session active...</div>` 
+                                : `<div class="text-secondary font-bold text-xl mb-2">Not Checked In</div>
+                                   <p class="text-sm">Ready to start your shift?</p>`
+                            }
+                        </div>
+                        <button class="btn ${isCheckedIn ? 'btn-secondary' : 'btn-primary'} w-full" 
+                            onclick="${isCheckedIn ? 'doCheckOut()' : 'doCheckIn()'}"
+                            style="${isCheckedIn ? 'border-color: orange; color: orange;' : ''}">
+                            ${isCheckedIn ? 'CHECK OUT' : 'CHECK IN NOW'}
+                        </button>
+                    </div>
+
+                    <!-- Credits Card -->
+                    <div class="card">
+                        <p class="text-secondary text-sm font-bold uppercase tracking-wider">Hours Bank</p>
+                        <div class="flex items-center gap-4 mt-4">
+                            <span class="text-4xl font-bold text-orange">${formatDecimal(vol.totalHours)}</span>
+                            <span class="text-secondary">hours earned</span>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-white/5 rounded-lg border border-white/10">
+                            <p class="text-sm text-secondary">Current Reward Tier</p>
+                            <p class="font-bold text-brand-blue">${currentTier ? currentTier.reward : 'Keep volunteering to earn rewards!'}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Upcoming Races</h3>
+                    <div class="card">
+                        <table>
+                            <thead><tr><th>Race</th><th>Date</th><th>Location</th></tr></thead>
+                            <tbody>
+                                ${appState.state.races.slice(0,3).map(r => `
+                                    <tr>
+                                        <td class="font-bold">${r.name}</td>
+                                        <td>${formatDate(r.date)}</td>
+                                        <td>${r.name.includes('Rocky') ? 'Huntsville, TX' : 'Bandera, TX'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderVolunteerCredits() {
+            const main = document.getElementById('main-content');
+            const vol = appState.currentUser;
+            const eligibleTiers = CONFIG.tiers.filter(t => vol.totalHours >= t.min);
+
+            main.innerHTML = `
+                <h2>My Credits</h2>
+                <div class="card mb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span class="text-3xl font-bold text-orange">${formatDecimal(vol.totalHours)}</span>
+                            <span class="text-secondary text-lg">available hours</span>
+                        </div>
+                    </div>
+                    
+                    <h3>Eligible Rewards</h3>
+                    ${eligibleTiers.length === 0 ? '<p>You haven\'t unlocked any rewards yet.</p>' : ''}
+                    <div class="grid gap-4 mt-4">
+                        ${eligibleTiers.map(tier => `
+                            <div class="p-4 border border-white/10 rounded-lg flex justify-between items-center bg-white/5">
+                                <div>
+                                    <div class="font-bold text-lg text-brand-blue">${tier.reward}</div>
+                                    <div class="text-sm text-secondary">Requires ${tier.min} hours</div>
+                                </div>
+                                <button class="btn btn-sm btn-secondary" onclick="requestRedemption(${tier.min})">Redeem</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderVolunteerHistory() {
+            const main = document.getElementById('main-content');
+            const vol = appState.currentUser;
+
+            main.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <h2>Volunteering History</h2>
+                    <button class="btn btn-sm btn-secondary" onclick="exportData()">Export CSV</button>
+                </div>
+                <div class="card overflow-hidden">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Event</th>
+                                <th>Hours</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${vol.history.length === 0 ? '<tr><td colspan="4" class="text-center p-4">No history yet.</td></tr>' : 
+                                vol.history.map(s => `
+                                    <tr>
+                                        <td>${formatDate(s.date)}</td>
+                                        <td>${s.race}</td>
+                                        <td>${formatDecimal(s.hours)}</td>
+                                        <td><span class="badge badge-green">${s.status}</span></td>
+                                    </tr>
+                                `).join('')
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // --- ADMIN DASHBOARD ---
+        function renderAdminLayout() {
+            renderNavbar('Admin Portal', 'Control Center');
+             // Layout
+             const layout = document.createElement('div');
+            layout.className = 'container dashboard-layout';
+            
+            // Sidebar
+            layout.innerHTML = `
+                <aside class="sidebar">
+                    <button class="nav-tab active" onclick="switchTab(this, 'admin-overview')">Overview</button>
+                    <button class="nav-tab" onclick="switchTab(this, 'admin-volunteers')">Volunteers</button>
+                    <button class="nav-tab" onclick="logout()" style="margin-top:auto; color: var(--status-red);">Sign Out</button>
+                </aside>
+                <main class="content-area" id="main-content">
+                    <!-- Dynamic Content -->
+                </main>
+            `;
+            app.appendChild(layout);
+            renderAdminOverview();
+        }
+
+        function renderAdminOverview() {
+            const main = document.getElementById('main-content');
+            const checkedInCount = appState.state.checkins.length;
+            const totalVols = appState.state.volunteers.length;
+            
+            main.innerHTML = `
+                <h2>Dashboard Overview</h2>
+                <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="card">
+                        <p class="text-sm font-bold uppercase text-secondary">Checked In</p>
+                        <div class="text-4xl font-bold text-white mt-2">${checkedInCount} / ${totalVols}</div>
+                        <div class="progress-bar mt-4"><div class="progress-fill" style="width: ${(checkedInCount/totalVols)*100}%"></div></div>
+                    </div>
+                     <div class="card">
+                        <p class="text-sm font-bold uppercase text-secondary">Total Debt (Hours)</p>
+                        <div class="text-4xl font-bold text-orange mt-2">
+                            ${Math.floor(appState.state.volunteers.reduce((acc, v) => acc + v.totalHours, 0))}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3>Real-time Check-ins</h3>
+                    <div class="card">
+                         <table>
+                            <thead><tr><th>Name</th><th>Check-in Time</th><th>Action</th></tr></thead>
+                            <tbody>
+                                ${appState.state.checkins.length === 0 ? '<tr><td colspan="3" class="text-center p-4">No active check-ins.</td></tr>' : 
+                                    appState.state.checkins.map(c => {
+                                        const v = appState.state.volunteers.find(vol => vol.id === c.volunteerId);
+                                        return `
+                                            <tr>
+                                                <td class="font-bold">${v ? v.name : 'Unknown'}</td>
+                                                <td>${formatTime(c.startTime)}</td>
+                                                <td><span class="badge badge-green">Active</span></td>
+                                            </tr>
+                                        `;
+                                    }).join('')
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminVolunteers() {
+            const main = document.getElementById('main-content');
+             main.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <h2>All Volunteers</h2>
+                    <input type="text" placeholder="Search volunteers..." class="input-field" style="width:200px" onkeyup="filterTable(this)">
+                </div>
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Total Hours</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vol-table-body">
+                            ${appState.state.volunteers.map(v => `
+                                <tr>
+                                    <td class="font-bold">${v.name}</td>
+                                    <td>${formatDecimal(v.totalHours)}</td>
+                                    <td>${appState.state.checkins.find(c => c.volunteerId === v.id) ? '<span class="badge badge-green">On Site</span>' : '<span class="text-secondary">--</span>'}</td>
+                                    <td><button class="btn btn-sm btn-secondary">Edit</button></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+             `;
+        }
+
+
+        // --- 4. INTERACTION HANDLERS ---
+        window.handleLogin = (type) => {
+            if (type === 'volunteer') {
+                // For demo, pick Michael Tran
+                appState.currentUser = appState.state.volunteers[0];
+                appState.currentView = 'dashboard';
+            } else {
+                appState.currentUser = { name: 'Dave' }; // Dummy admin
+                appState.currentView = 'admin';
+            }
+            render();
+        };
+
+        window.logout = () => {
+            appState.currentUser = null;
+            appState.currentView = 'login';
+            render();
+        };
+
+        window.switchTab = (el, tab) => {
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+
+            // Render content
+            if (tab === 'home') renderVolunteerHome();
+            if (tab === 'credits') renderVolunteerCredits();
+            if (tab === 'history') renderVolunteerHistory();
+            if (tab === 'admin-overview') renderAdminOverview();
+            if (tab === 'admin-volunteers') renderAdminVolunteers();
+        };
+
+        window.doCheckIn = () => {
+            const res = appState.checkIn(appState.currentUser.id);
+            if(res.success) {
+                alert('Checked in successfully!');
+                renderVolunteerHome(); // re-render
+            }
+        };
+
+        window.doCheckOut = () => {
+            const res = appState.checkOut(appState.currentUser.id);
+            if(res.success) {
+                alert(`Checked out! You earned ${formatDecimal(res.hours)} hours.`);
+                renderVolunteerHome();
+            }
+        };
+
+        window.requestRedemption = (val) => {
+            if(confirm(`Use ${val} hours to redeem this reward?`)) {
+                if(appState.redeemCredits(appState.currentUser.id, val)) {
+                    alert('Credits redeemed! Admin will contact you.');
+                    renderVolunteerCredits();
+                } else {
+                    alert('Insufficient hours.');
+                }
+            }
+        };
+
+        window.filterTable = (input) => {
+            // Simple table filter
+            const filter = input.value.toUpperCase();
+            const trs = document.getElementById('vol-table-body').getElementsByTagName('tr');
+            for (let i = 0; i < trs.length; i++) {
+                const td = trs[i].getElementsByTagName('td')[0];
+                if (td) {
+                    const txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        trs[i].style.display = "";
+                    } else {
+                        trs[i].style.display = "none";
+                    }
+                }       
+            }
+        };
+
+        // --- INIT ---
+        render(); // Start
+    </script>
+</body>
+</html>

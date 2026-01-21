@@ -51,7 +51,7 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
                         {sortedProjects.map((project) => (
                             <Link
                                 key={project.id}
-                                href={`/project/${project.id}`}
+                                href={`/project?id=${project.id}`}
                                 className="block px-4 py-3 hover:bg-muted/50 transition-colors"
                             >
                                 <div className="flex items-center justify-between mb-1">

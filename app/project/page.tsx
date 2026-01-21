@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { db } from "@/lib/firebase/client"; // Use client SDK
 import { doc, onSnapshot, collection, query, where, orderBy, type DocumentData } from "firebase/firestore";
 import { BuildProgressWidget } from "@/components/agency-dashboard/BuildProgressWidget";
@@ -12,8 +12,19 @@ import { Play } from "lucide-react";
 import type { LogEntry, Issue, BuildTask } from "@/lib/firebase/schema";
 
 export default function ProjectMissionControl() {
-    const params = useParams();
-    const projectId = params.id as string;
+    return (
+        <React.Suspense fallback={<div className="p-8">Loading Mission Control...</div>}>
+            <ProjectMissionControlContent />
+        </React.Suspense>
+    );
+}
+
+function ProjectMissionControlContent() {
+    const searchParams = useSearchParams();
+    const projectId = searchParams.get("id");
+
+    // Early return or loading state if ID is missing
+    if (!projectId) return <div className="p-8">Invalid Project ID</div>;
 
     const [projectStatus, setProjectStatus] = React.useState<string>("loading");
     const [tasks, setTasks] = React.useState<BuildTask[]>([]);
@@ -73,11 +84,8 @@ export default function ProjectMissionControl() {
     const handleStartBuild = async () => {
         setIsBuilding(true);
         try {
-            await fetch("/api/agency/build", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ projectId }),
-            });
+            const { triggerBuildSequence } = await import("@/lib/agency/client-ops");
+            await triggerBuildSequence(projectId);
         } catch (err) {
             console.error("Failed to start build", err);
         } finally {
@@ -88,11 +96,8 @@ export default function ProjectMissionControl() {
     const handleAutoFix = async (issueId: string, description: string) => {
         setIsFixing(issueId);
         try {
-            await fetch("/api/agency/debug", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ issueId, description, projectId }),
-            });
+            const { triggerAutoFix } = await import("@/lib/agency/client-ops");
+            await triggerAutoFix(issueId, description, projectId);
         } catch (err) {
             console.error("Auto-fix failed", err);
         } finally {

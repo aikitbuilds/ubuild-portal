@@ -42,7 +42,7 @@ export function PipelineOverview({ data, totalMRR, activeBuilds, criticalIssues 
 
                     {/* Bar Chart */}
                     <div className="lg:col-span-3 h-[200px]">
-                        <ResponsiveContainer width="100%" height="100%">
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                             <BarChart data={data} layout="vertical" margin={{ left: 20, right: 20 }}>
                                 <XAxis type="number" hide />
                                 <YAxis
