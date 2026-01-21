@@ -8,6 +8,7 @@ import { generateGhostData } from "@/lib/tejas/data";
 import { VolunteerGrid } from "@/components/tejas/VolunteerGrid";
 import { Button } from "@/components/ui/button";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
+import { AddVolunteerModal } from "@/components/tejas/AddVolunteerModal";
 
 function VolunteerHubContent() {
     const { volunteers, assignments, alerts } = useMemo(() => generateGhostData(), []);
@@ -29,12 +30,34 @@ function VolunteerHubContent() {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white text-[10px] font-black uppercase tracking-widest px-6 h-12 rounded-2xl">
+                    <Button
+                        variant="outline"
+                        onClick={() => {
+                            // Quick CSV Export Logic
+                            const headers = ["Name", "Email", "Phone", "Status", "Reliability"];
+                            const rows = volunteers.map(v => [
+                                v.name,
+                                v.email,
+                                v.phone,
+                                (v as any).status || "unknown",
+                                v.reliabilityScore
+                            ]);
+                            const csvContent = "data:text/csv;charset=utf-8,"
+                                + headers.join(",") + "\n"
+                                + rows.map(e => e.join(",")).join("\n");
+                            const encodedUri = encodeURI(csvContent);
+                            const link = document.createElement("a");
+                            link.setAttribute("href", encodedUri);
+                            link.setAttribute("download", "tejas_volunteers.csv");
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }}
+                        className="border-white/10 hover:bg-white/5 text-white text-[10px] font-black uppercase tracking-widest px-6 h-12 rounded-2xl"
+                    >
                         <Download className="w-4 h-4 mr-2" /> Export CSV
                     </Button>
-                    <Button className="bg-[#E67E22] hover:bg-[#D35400] text-white text-[10px] font-black uppercase tracking-widest px-6 h-12 rounded-2xl">
-                        Add Volunteer
-                    </Button>
+                    <AddVolunteerModal />
                 </div>
             </div>
 
