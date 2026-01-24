@@ -1,10 +1,12 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import * as nodemailer from "nodemailer";
+import * as cors from "cors";
 import { qualificationAgent } from "./agents";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 
 admin.initializeApp();
+const corsHandler = cors({ origin: true });
 
 // ============================================================================
 // 1. AI RESEARCH AGENT (Callable Function)
@@ -287,3 +289,75 @@ export const askTejas = functions.https.onCall(async (data, context) => {
 // 5. TEJAS ASSIGNMENT ENGINE (Phase 2)
 // ============================================================================
 export { updateVolunteerAssignment, getVolunteers } from "./tejas";
+
+// ============================================================================
+// 6. VOLUNTEER REPORTING (Backported from V1 API)
+// ============================================================================
+export const reportIssue = functions.https.onRequest(async (req, res) => {
+    return corsHandler(req, res, async () => {
+        if (req.method !== "POST") {
+            res.status(405).send("Method Not Allowed");
+            return;
+        }
+
+        try {
+            const { volunteerId, station, category, severity, message, voiceUrl } = req.body;
+
+            if (!volunteerId || !message) {
+                res.status(400).json({ error: "Missing required fields" });
+                return;
+            }
+
+            console.log(`🤖 AI Director (Cloud): Triaging report from ${volunteerId} at ${station}...`);
+
+            // Triage Logic (Heuristic for now)
+            let aiPriority = 50;
+            let aiSummary = "Processing report...";
+            let suggestedAction = "Awaiting manual review.";
+
+            if (severity === "emergency" || category === "medical") {
+                aiPriority = 95;
+                aiSummary = `Urgent ${category} alert at ${station}. Potential critical risk detected.`;
+                suggestedAction = "IMMEDIATE DISPATCH: Send medical support and coordinate with local EMS.";
+            } else if (severity === "high" || category === "staffing") {
+                aiPriority = 80;
+                aiSummary = `High priority ${category} issue reported. Coverage gap likely.`;
+                suggestedAction = "REASSIGNMENT: Look for available experts at nearby stations to cover gaps.";
+            } else if (category === "gear") {
+                aiPriority = 60;
+                aiSummary = `Resupply request for ${station}.`;
+                suggestedAction = "LOGISTICS: Add to next supply run within 2 hours.";
+            } else {
+                aiPriority = 30;
+                aiSummary = `Routine ${category} update.`;
+                suggestedAction = "MONITOR: No immediate intervention required.";
+            }
+
+            const ticketId = `t-${Date.now()}`;
+            const newTicket = {
+                id: ticketId,
+                volunteer_id: volunteerId,
+                station: station || "Unknown",
+                category: category || "general",
+                severity: severity || "low",
+                message: message,
+                voice_url: voiceUrl || null,
+                ai_summary: aiSummary,
+                ai_priority: aiPriority,
+                suggested_action: suggestedAction,
+                status: "triaged",
+                created_at: admin.firestore.FieldValue.serverTimestamp()
+            };
+
+            // Write to Firestore
+            await admin.firestore().collection("tejas_tickets").doc(ticketId).set(newTicket);
+
+            console.log("✅ Report Triaged Successfully:", ticketId);
+            res.status(200).json({ ...newTicket, created_at: new Date().toISOString() });
+
+        } catch (error: any) {
+            console.error("API Error:", error);
+            res.status(500).json({ error: "Internal Server Error", details: error.message });
+        }
+    });
+});

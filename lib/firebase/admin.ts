@@ -5,8 +5,10 @@
  * Used by API routes to interact with Firestore.
  */
 
+import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
+
 
 // Explicitly load .env.local before checking process.env for credentials
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
@@ -22,12 +24,28 @@ const serviceAccount: ServiceAccount = {
 // Initialize Firebase Admin (singleton pattern)
 function initializeFirebaseAdmin() {
     if (getApps().length === 0) {
-        initializeApp({
-            credential: cert(serviceAccount),
-        });
+        // Try environment variables first
+        if (serviceAccount.projectId && serviceAccount.clientEmail && serviceAccount.privateKey) {
+            initializeApp({
+                credential: cert(serviceAccount),
+            });
+        }
+        // Fallback to local JSON file if available (specifically for Tejas migration)
+        else {
+            const jsonPath = path.resolve(process.cwd(), '../tejasOS/sps-leadscleandb-c242af7a873b.json');
+            if (fs.existsSync(jsonPath)) {
+                initializeApp({
+                    credential: cert(jsonPath),
+                });
+            } else {
+                console.warn('⚠️ No Firebase Admin credentials found (env or JSON). Firestore operations will fail.');
+                // We still attempt to getFirestore, which might fail later
+            }
+        }
     }
     return getFirestore();
 }
+
 
 // Export the Firestore instance
 export const db = initializeFirebaseAdmin();

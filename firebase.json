@@ -10,6 +10,12 @@
             ],
             "cleanUrls": true,
             "trailingSlash": true,
+            "rewrites": [
+                {
+                    "source": "/api/tejas/report-issue",
+                    "function": "reportIssue"
+                }
+            ],
             "headers": [
                 {
                     "source": "**",
