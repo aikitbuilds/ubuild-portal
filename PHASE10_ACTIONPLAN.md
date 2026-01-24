@@ -19,17 +19,18 @@ Connect Volunteers to the Race Director via an AI-driven triage system.
    - Action handlers for the RD.
 
 ## Build Steps
-- [ ] Step 1: Implement "Report Issue" UI in Volunteer Dashboard.
-- [ ] Step 2: Create `tejas_tickets` Firestore schema and mock data.
-- [ ] Step 3: Implement `/api/tejas/report-issue` route.
-- [ ] Step 4: Build `<CommandCenter />` component.
-- [ ] Step 5: Integrate Command Center into Admin Dashboard.
-- [ ] Step 6: Update `USERSTORY.md` and `ubuild-deploy.md`.
+- [x] Step 1: Implement "Report Issue" UI in Volunteer Dashboard. (Restored)
+- [x] Step 2: Create `tejas_tickets` Firestore schema and mock data. (Implemented in lib/tejas/data.ts)
+- [x] Step 3: Implement `/api/tejas/report-issue` route. (Restored and Secured)
+- [x] Step 4: Build `<CommandCenter />` component. (Available in components/tejas/)
+- [x] Step 5: Integrate Command Center into Admin Dashboard. (Integrated)
+- [x] Step 6: Update `USERSTORY.md` and `ubuild-deploy.md`.
 
 ## Checkpoints
-- [ ] Volunteer can submit a report.
-- [ ] Admin sees the report with AI analysis.
-- [ ] Admin can close/resolve the ticket.
+- [x] Volunteer can submit a report.
+- [x] Admin sees the report with AI analysis.
+- [x] Admin can close/resolve the ticket.
 
 ## Change Log
 - 2026-01-21: Initialized Phase 10 action plan.
+- 2026-01-24: Restored report-issue API, secured Gemini API keys, and verified Command Center integration.

@@ -171,8 +171,8 @@ const tools = {
 export const askTejas = functions.https.onCall(async (data, context) => {
     const { message } = data;
 
-    // Direct key for verification
-    const GOOGLE_API_KEY = "AIzaSyAW-KhRdPtqT0WAUwu_Hwbc8dHMazU7_zc";
+    // Use environment variables for API key to avoid hardcoding secrets
+    const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || functions.config().google?.api_key || "AIzaSy..." // Placeholder for fallback if absolutely necessary, but prefer env
 
     console.log("🤖 Gemini Call starting with gemini-2.0-flash (Fallback Active)...");
 
