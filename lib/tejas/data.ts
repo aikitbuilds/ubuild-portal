@@ -2,16 +2,14 @@ export interface Volunteer {
     id: string;
     firstName: string;
     lastName: string;
-    name: string; // for convenience
+    name: string; // aggregated
     email: string;
     phone: string;
     reliabilityScore: number; // 0-100
     experience_level: 'novice' | 'intermediate' | 'expert';
     history: string[];
     distanceFromVenue: number; // in miles
-    written_instructions?: string;
-    voice_instruction_url?: string;
-    riskScore?: number;
+    // Removed loose fields: written_instructions, voice_instruction_url, riskScore (now calculated/stored in separate context)
 }
 
 export interface Assignment {
@@ -21,9 +19,11 @@ export interface Assignment {
     startTime: Date;
     endTime: Date;
     role: string;
-    shift_time?: string;
-    status: 'pending' | 'confirmed' | 'active' | 'completed';
-    backupVolunteerId?: string;
+    status: 'pending' | 'confirmed' | 'active' | 'completed' | 'suggested';
+    suggested_station?: string;
+    reasoning?: string;
+    // Removed loose fields
+
 }
 
 export interface CheckIn {
@@ -31,10 +31,11 @@ export interface CheckIn {
     volunteerId: string;
     assignmentId: string;
     timestamp: Date;
-    location?: {
+    location: {
         lat: number;
         lng: number;
     };
+    source: 'kiosk' | 'mobile' | 'admin';
 }
 
 export interface Alert {
@@ -153,6 +154,19 @@ export function generateGhostData() {
         history: ['Rocky Raccoon 2024'],
         distanceFromVenue: 12
     };
+    // Stakeholder 0: Aikit Shingala
+    const aikit: Volunteer = {
+        id: 'v-aikit-shingala',
+        firstName: 'Aikit',
+        lastName: 'Shingala',
+        name: 'Aikit Shingala',
+        email: 'aikit.shingala@gmail.com',
+        phone: '555-AIKT',
+        reliabilityScore: 100,
+        experience_level: 'expert',
+        history: ['Tech Lead'],
+        distanceFromVenue: 0
+    };
     // Stakeholder 1: Dave Smithey
     const dave: Volunteer = {
         id: 'v-dave-smithey',
@@ -164,8 +178,7 @@ export function generateGhostData() {
         reliabilityScore: 100,
         experience_level: 'expert',
         history: ['All Races Ever'],
-        distanceFromVenue: 0,
-        riskScore: 0
+        distanceFromVenue: 0
     };
     // Stakeholder 2: Brooke Berg
     const brooke: Volunteer = {
@@ -178,12 +191,11 @@ export function generateGhostData() {
         reliabilityScore: 100,
         experience_level: 'expert',
         history: ['Logistics Queen'],
-        distanceFromVenue: 0,
-        riskScore: 0
+        distanceFromVenue: 0
     };
 
     // Add stakeholders FIRST so they appear at top of lists
-    volunteers.push(dave, brooke, michael);
+    volunteers.push(aikit, dave, brooke, michael);
 
     // 69 more volunteers
     for (let i = 1; i <= 69; i++) {
@@ -232,6 +244,17 @@ export function generateGhostData() {
         startTime: assignments[1].startTime,
         endTime: assignments[1].endTime,
         role: 'Crew',
+        status: 'confirmed'
+    });
+
+    // Aikit Shingala Assignment: Start/Finish Line
+    assignments.push({
+        id: 'a-aikit-1',
+        volunteerId: 'v-aikit-shingala',
+        station: 'Start/Finish',
+        startTime: new Date('2026-02-06T06:00:00'), // Friday 6am
+        endTime: new Date('2026-02-06T14:00:00'),   // Friday 2pm
+        role: 'Tech Coordinator',
         status: 'confirmed'
     });
 

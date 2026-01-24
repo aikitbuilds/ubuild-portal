@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "sps-leadscleandb"
-  }
+  },
+  "targets": {
+    "sps-leadscleandb": {
+      "hosting": {
+        "tejas-app": [
+          "tejasos"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

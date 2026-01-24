@@ -24,7 +24,7 @@ export function Logo({ size = "md", variant = "full", className }: LogoProps) {
         <div className={cn("flex items-center gap-2", className)}>
             <div className="relative">
                 <Image
-                    src="/assets/images/logo_words1.png"
+                    src="/assets/images/ubuild_logo.png"
                     alt="uBuild Logo"
                     width={width}
                     height={height}
@@ -45,7 +45,7 @@ export function LogoAnimated({ size = "lg", className }: Omit<LogoProps, "varian
         <div className={cn("flex items-center gap-3", className)}>
             <div className="relative animate-in fade-in duration-700">
                 <Image
-                    src="/assets/images/logo_words1.png"
+                    src="/assets/images/ubuild_logo.png"
                     alt="uBuild Logo"
                     width={width}
                     height={height}

@@ -18,6 +18,8 @@ module.exports = {
         },
         extend: {
             colors: {
+                "tejas-green": "#2E5C38",
+                "tejas-brown": "#8B5A2B",
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
                 ring: "hsl(var(--ring))",

@@ -17,8 +17,28 @@ interface AIAlert {
     timestamp: string;
 }
 
-export function AICommandQueue() {
-    const [alerts, setAlerts] = useState<AIAlert[]>([
+import { Volunteer } from "@/lib/tejas/schema";
+
+interface AICommandQueueProps {
+    volunteers?: Volunteer[];
+}
+
+export function AICommandQueue({ volunteers = [] }: AICommandQueueProps) {
+    // Generate alarms from live risk scores
+    const riskAlerts: AIAlert[] = volunteers
+        .filter(v => (v.aiMetrics?.riskScore || 0) > 70)
+        .map(v => ({
+            id: `risk-${v.id}`,
+            type: 'personnel',
+            severity: 'red',
+            message: `High Risk Detected: ${v.firstName} ${v.lastName} has a risk score of ${v.aiMetrics?.riskScore}%.`,
+            recommendation: "Contact immediately to confirm attendance.",
+            location: "Roster Monitor",
+            timestamp: "Live"
+        }));
+
+    // Static ambient alerts for demo flavor
+    const ambientAlerts: AIAlert[] = [
         {
             id: 'a1',
             type: 'weather',
@@ -27,29 +47,14 @@ export function AICommandQueue() {
             recommendation: "Deploy extra canopy & dry socks.",
             location: "Aid Station 4",
             timestamp: "Now"
-        },
-        {
-            id: 'a2',
-            type: 'logistics',
-            severity: 'yellow',
-            message: "Water supplies projecting low at Headquarters by 4:30 PM based on current consumption.",
-            recommendation: "Dispatch supply truck.",
-            location: "Headquarters",
-            timestamp: "5m ago"
-        },
-        {
-            id: 'a3',
-            type: 'personnel',
-            severity: 'red',
-            message: "Volunteer 'Sarah J.' has not checked in (15 min late). Risk Score: 85%.",
-            recommendation: "Activate Backup List.",
-            location: "Gate (AS2)",
-            timestamp: "15m ago"
         }
-    ]);
+    ];
+
+    const [dismissed, setDismissed] = useState<string[]>([]);
+    const alerts = [...riskAlerts, ...ambientAlerts].filter(a => !dismissed.includes(a.id));
 
     const handleApprove = (id: string) => {
-        setAlerts(alerts.filter(a => a.id !== id));
+        setDismissed(prev => [...prev, id]);
     };
 
     return (

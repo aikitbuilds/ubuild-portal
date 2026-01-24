@@ -108,8 +108,8 @@ export function RoiChart({ className, showCard = true }: RoiChartProps) {
             </motion.div>
 
             {/* Bar Chart Visualization */}
-            <div className="h-[300px] w-full min-w-0" style={{ width: "100%", height: 300 }}>
-                <ResponsiveContainer width="100%" height="100%" minWidth={0} aspect={undefined}>
+            <div className="h-[300px] w-full min-w-0 relative" style={{ width: "100%", height: 300 }}>
+                <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                         data={chartData}
                         layout="vertical"
@@ -125,6 +125,7 @@ export function RoiChart({ className, showCard = true }: RoiChartProps) {
                             width={80}
                         />
                         <Tooltip
+                            cursor={{ fill: 'transparent' }}
                             contentStyle={{
                                 backgroundColor: '#0f172a',
                                 border: '1px solid #334155',

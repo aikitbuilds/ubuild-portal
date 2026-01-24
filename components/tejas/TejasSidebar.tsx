@@ -11,22 +11,24 @@ import {
     ChevronLeft,
     ArrowLeft,
     Users,
-    AlertCircle
+    AlertCircle,
+    Network
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-    { icon: LayoutDashboard, label: "Command Center", href: "/tejas/dashboard" },
+    { icon: LayoutDashboard, label: "Command Center V2", href: "/tejas/dashboard" },
     { icon: Users, label: "Volunteer Hub", href: "/tejas/volunteer-hub" },
     { icon: UserCheck, label: "Mobile Check-In", href: "/tejas/checkin" },
+    { icon: MapPin, label: "Strategy Room", href: "/tejas/strategy" },
 ];
 
 export function TejasSidebar() {
     const pathname = usePathname();
 
     return (
-        <div className="w-64 bg-[#0B1120] border-r border-white/5 flex flex-col h-full fixed left-0 top-0 z-50">
+        <div className="w-64 bg-[#0B1120] border-r border-white/5 flex flex-col h-full fixed left-0 top-0 z-[100]">
             <div className="p-6">
                 <div className="flex items-center gap-3 mb-10">
                     <div className="bg-white/10 p-2 rounded-xl">
@@ -44,11 +46,11 @@ export function TejasSidebar() {
 
                 <nav className="space-y-1">
                     {menuItems.map((item) => (
-                        <Link
+                        <a
                             key={item.href}
                             href={item.href}
                             className={cn(
-                                "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-bold transition-all group border border-transparent",
+                                "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-bold transition-all group border border-transparent cursor-pointer relative z-[101]",
                                 pathname === item.href
                                     ? "bg-[#1E293B] text-[#E67E22] shadow-xl shadow-black/20 border-[#E67E22]/20 ring-1 ring-[#E67E22]/10"
                                     : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -59,7 +61,7 @@ export function TejasSidebar() {
                                 pathname === item.href ? "text-[#E67E22]" : "text-slate-500 group-hover:text-white"
                             )} />
                             {item.label}
-                        </Link>
+                        </a>
                     ))}
                 </nav>
             </div>

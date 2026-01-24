@@ -45,3 +45,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Google Credentials
+credentials.json
+
+# Test files and Logs
+test_key.*
+*_log.txt
+roster.json
+*.local

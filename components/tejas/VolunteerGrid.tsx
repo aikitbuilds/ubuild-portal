@@ -12,8 +12,61 @@ import {
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, AlertTriangle, ChevronRight, ChevronDown, ArrowUpDown } from "lucide-react";
-import { Volunteer, Assignment, detectConflicts } from "@/lib/tejas/data";
+import { Volunteer, Assignment } from "@/lib/tejas/schema";
 import { cn } from "@/lib/utils";
+// Grid specific alert interface
+interface GridAlert {
+    id: string;
+    volunteerId: string;
+    severity: 'red' | 'yellow';
+    message: string;
+}
+
+// Helper to detect conflicts (V2)
+function detectConflicts(assignments: Assignment[]): GridAlert[] {
+    const alerts: GridAlert[] = [];
+    const byVol = assignments.reduce((acc, a) => {
+        if (!acc[a.volunteerId]) acc[a.volunteerId] = [];
+        acc[a.volunteerId].push(a);
+        return acc;
+    }, {} as Record<string, Assignment[]>);
+
+    Object.entries(byVol).forEach(([vid, assigns]) => {
+        for (let i = 0; i < assigns.length; i++) {
+            for (let j = i + 1; j < assigns.length; j++) {
+                const a1 = assigns[i];
+                const a2 = assigns[j];
+                const start1 = a1.shiftStart;
+                const end1 = a1.shiftEnd;
+                const start2 = a2.shiftStart;
+                const end2 = a2.shiftEnd;
+
+                if (!start1 || !end1 || !start2 || !end2) continue;
+
+                // Handle Timestamp vs Date vs String
+                const toDate = (val: any) => {
+                    if (val?.toDate) return val.toDate();
+                    return new Date(val);
+                };
+
+                const s1 = toDate(start1);
+                const e1 = toDate(end1);
+                const s2 = toDate(start2);
+
+                if (s1 < s2 && e1 > s2) { // logic simplified
+                    alerts.push({
+                        id: `conflict-${vid}`,
+                        volunteerId: vid,
+                        severity: 'yellow',
+                        message: 'Shift Overlap'
+                    });
+                }
+            }
+        }
+    });
+    return alerts;
+}
+
 
 interface VolunteerGridProps {
     volunteers: Volunteer[];
@@ -66,7 +119,7 @@ export function VolunteerGrid({ volunteers, assignments, isDark }: VolunteerGrid
         // Filter first
         if (search) {
             sorted = sorted.filter(v =>
-                v.name.toLowerCase().includes(search.toLowerCase()) ||
+                `${v.firstName} ${v.lastName}`.toLowerCase().includes(search.toLowerCase()) ||
                 v.email.toLowerCase().includes(search.toLowerCase())
             );
         }
@@ -77,13 +130,13 @@ export function VolunteerGrid({ volunteers, assignments, isDark }: VolunteerGrid
             const bStatus = getVolunteerStatus(b);
             const aAssign = assignments.find(as => as.volunteerId === a.id);
             const bAssign = assignments.find(as => as.volunteerId === b.id);
-            const aStation = aAssign?.station || "Z_Unassigned";
-            const bStation = bAssign?.station || "Z_Unassigned";
+            const aStation = aAssign?.stationId || "Z_Unassigned";
+            const bStation = bAssign?.stationId || "Z_Unassigned";
 
             let comparison = 0;
             switch (sortConfig.key) {
                 case 'name':
-                    comparison = a.lastName.localeCompare(b.lastName);
+                    comparison = a.lastName.localeCompare(b.lastName); // Sort by last name
                     break;
                 case 'station':
                     comparison = aStation.localeCompare(bStation);
@@ -92,7 +145,7 @@ export function VolunteerGrid({ volunteers, assignments, isDark }: VolunteerGrid
                     comparison = aStatus.localeCompare(bStatus);
                     break;
                 case 'reliability':
-                    comparison = b.reliabilityScore - a.reliabilityScore;
+                    comparison = (b.aiMetrics?.riskScore || 0) - (a.aiMetrics?.riskScore || 0); // Risk is inverse of reliability
                     break;
             }
             return sortConfig.direction === 'asc' ? comparison : -comparison;
@@ -155,7 +208,7 @@ export function VolunteerGrid({ volunteers, assignments, isDark }: VolunteerGrid
                                 className={cn("cursor-pointer hover:text-white transition-colors font-black text-[10px] uppercase tracking-widest", isDark ? "text-slate-500" : "text-[#8B4513]")}
                                 onClick={() => toggleSort('reliability')}
                             >
-                                <div className="flex items-center gap-1">Reliability <ArrowUpDown className="w-3 h-3" /></div>
+                                <div className="flex items-center gap-1">Risk AI <ArrowUpDown className="w-3 h-3" /></div>
                             </TableHead>
                         </TableRow>
                     </TableHeader>
@@ -183,14 +236,14 @@ export function VolunteerGrid({ volunteers, assignments, isDark }: VolunteerGrid
                                         </TableCell>
                                         <TableCell className={cn("font-bold text-sm", isDark ? "text-white" : "text-[#2C1810]")}>
                                             <div className="flex items-center gap-2">
-                                                {v.name}
+                                                {v.firstName} {v.lastName}
                                                 {status === "No Show" && (
                                                     <AlertTriangle className="w-3.5 h-3.5 text-red-500" />
                                                 )}
                                             </div>
                                         </TableCell>
                                         <TableCell className="text-[11px] text-slate-500">
-                                            {vAssigns.length > 0 ? vAssigns[0].station : "None"}
+                                            {vAssigns.length > 0 ? vAssigns[0].stationId : "None"}
                                         </TableCell>
                                         <TableCell className="text-center">
                                             <Badge
@@ -207,66 +260,68 @@ export function VolunteerGrid({ volunteers, assignments, isDark }: VolunteerGrid
                                         </TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-2">
-                                                <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden w-12">
-                                                    <div
-                                                        className={cn(
-                                                            "h-full rounded-full",
-                                                            v.reliabilityScore > 90 ? "bg-emerald-500" : v.reliabilityScore > 75 ? "bg-[#E67E22]" : "bg-red-500"
-                                                        )}
-                                                        style={{ width: `${v.reliabilityScore}%` }}
-                                                    />
-                                                </div>
-                                                <span className="text-[10px] font-bold text-slate-500">{v.reliabilityScore}%</span>
+                                                {(v.aiMetrics?.riskScore || 0) > 70 ? (
+                                                    <Badge variant="destructive" className="bg-red-500/10 text-red-500 border-red-500/20 text-[9px] font-black uppercase">High Risk</Badge>
+                                                ) : (v.aiMetrics?.riskScore || 0) > 40 ? (
+                                                    <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20 text-[9px] font-black uppercase">Medium</Badge>
+                                                ) : (
+                                                    <span className="text-[10px] font-bold text-slate-500">Low</span>
+                                                )}
+                                                <span className="text-[10px] font-bold text-slate-500 ml-1">
+                                                    {v.aiMetrics?.riskScore || 0}%
+                                                </span>
                                             </div>
                                         </TableCell>
                                     </TableRow>
 
-                                    {isExpanded && (
-                                        <TableRow className={cn("border-t-0", isDark ? "bg-white/[0.02]" : "bg-[#FDFCF8]/50")}>
-                                            <TableCell colSpan={5} className="p-0">
-                                                <div className={cn(
-                                                    "p-6 border-l-2 ml-[19px] space-y-4",
-                                                    isDark ? "border-white/10" : "border-[#4A5D23]"
-                                                )}>
-                                                    <div className="flex justify-between items-center">
-                                                        <h4 className={cn("text-[10px] font-black uppercase tracking-widest", isDark ? "text-[#E67E22]" : "text-[#8B4513]")}>Assignment Details</h4>
-                                                        <div className="flex gap-4">
-                                                            <div className="text-[10px] font-bold text-slate-500">
-                                                                Phone: <span className="text-white">{v.phone}</span>
-                                                            </div>
-                                                            <div className="text-[10px] font-bold text-slate-500">
-                                                                Exp: <span className="text-white capitalize">{v.experience_level}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                        {vAssigns.map(a => (
-                                                            <div key={a.id} className={cn(
-                                                                "p-4 rounded-xl border relative overflow-hidden",
-                                                                isDark ? "bg-white/5 border-white/5" : "bg-white border-[#8B4513]/10 shadow-sm"
-                                                            )}>
-                                                                <div className="flex justify-between items-start">
-                                                                    <div>
-                                                                        <p className={cn("font-bold text-xs", isDark ? "text-slate-200" : "text-[#4A5D23]")}>{a.station}</p>
-                                                                        <p className="text-[10px] text-slate-500 mt-1">
-                                                                            {a.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {a.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                                                        </p>
-                                                                    </div>
-                                                                    <Badge className="bg-white/10 text-white text-[8px]">{a.role}</Badge>
+                                    {
+                                        isExpanded && (
+                                            <TableRow className={cn("border-t-0", isDark ? "bg-white/[0.02]" : "bg-[#FDFCF8]/50")}>
+                                                <TableCell colSpan={5} className="p-0">
+                                                    <div className={cn(
+                                                        "p-6 border-l-2 ml-[19px] space-y-4",
+                                                        isDark ? "border-white/10" : "border-[#4A5D23]"
+                                                    )}>
+                                                        <div className="flex justify-between items-center">
+                                                            <h4 className={cn("text-[10px] font-black uppercase tracking-widest", isDark ? "text-[#E67E22]" : "text-[#8B4513]")}>Assignment Details</h4>
+                                                            <div className="flex gap-4">
+                                                                <div className="text-[10px] font-bold text-slate-500">
+                                                                    Phone: <span className="text-white">{v.phone}</span>
+                                                                </div>
+                                                                <div className="text-[10px] font-bold text-slate-500">
+                                                                    Exp: <span className="text-white capitalize">{v.roles.join(", ")}</span>
                                                                 </div>
                                                             </div>
-                                                        ))}
+                                                        </div>
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                            {vAssigns.map(a => (
+                                                                <div key={a.id} className={cn(
+                                                                    "p-4 rounded-xl border relative overflow-hidden",
+                                                                    isDark ? "bg-white/5 border-white/5" : "bg-white border-[#8B4513]/10 shadow-sm"
+                                                                )}>
+                                                                    <div className="flex justify-between items-start">
+                                                                        <div>
+                                                                            <p className={cn("font-bold text-xs", isDark ? "text-slate-200" : "text-[#4A5D23]")}>{a.stationId}</p>
+                                                                            <p className="text-[10px] text-slate-500 mt-1">
+                                                                                {(a.shiftStart as any)?.toDate?.().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || "N/A"} - {(a.shiftEnd as any)?.toDate?.().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || "N/A"}
+                                                                            </p>
+                                                                        </div>
+                                                                        <Badge className="bg-white/10 text-white text-[8px]">General</Badge>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </TableCell>
-                                        </TableRow>
-                                    )}
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    }
                                 </React.Fragment>
                             );
                         })}
                     </TableBody>
                 </Table>
             </div>
-        </div>
+        </div >
     );
 }

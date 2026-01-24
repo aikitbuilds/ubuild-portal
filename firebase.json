@@ -1,31 +1,45 @@
 {
-    "hosting": {
-        "public": "out",
-        "ignore": [
-            "firebase.json",
-            "**/.*",
-            "**/node_modules/**"
-        ],
-        "cleanUrls": true,
-        "trailingSlash": true,
-        "rewrites": [
-            {
-                "source": "/tejas-portal",
-                "destination": "/tejas-portal.html"
-            }
-        ],
-        "headers": [
-            {
-                "source": "**",
-                "headers": [
-                    {
-                        "key": "Cache-Control",
-                        "value": "no-cache, no-store, must-revalidate"
-                    }
-                ]
-            }
-        ]
-    },
+    "hosting": [
+        {
+            "target": "tejas-app",
+            "public": "out",
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "cleanUrls": true,
+            "trailingSlash": true,
+            "headers": [
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "no-cache, no-store, must-revalidate"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "target": "wrapper-app",
+            "public": "out",
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "cleanUrls": true,
+            "trailingSlash": true,
+            "rewrites": [
+                {
+                    "source": "/tejas-portal",
+                    "destination": "/tejas-portal.html"
+                }
+            ]
+        }
+    ],
     "functions": [
         {
             "source": "functions",
@@ -36,6 +50,9 @@
                 "firebase-debug.log",
                 "firebase-debug.*.log",
                 "*.local"
+            ],
+            "predeploy": [
+                "npm --prefix \"$RESOURCE_DIR\" run build"
             ]
         }
     ],

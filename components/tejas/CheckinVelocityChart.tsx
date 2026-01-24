@@ -2,7 +2,7 @@
 
 import React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Volunteer } from "@/lib/tejas/data";
+import { Volunteer } from "@/lib/tejas/schema";
 
 interface CheckinVelocityChartProps {
     volunteers: Volunteer[];

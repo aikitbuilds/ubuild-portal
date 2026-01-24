@@ -36,9 +36,9 @@ export default function TejasVolunteerApp() {
         setIsSearching(true);
         setTimeout(() => {
             const found = volunteers.find(v =>
-                v.email.toLowerCase() === searchQuery.toLowerCase() ||
-                v.phone === searchQuery ||
-                v.name.toLowerCase().includes(searchQuery.toLowerCase())
+                (v.email || "").toLowerCase() === searchQuery.toLowerCase() ||
+                (v.phone || "") === searchQuery ||
+                (v.name || "").toLowerCase().includes(searchQuery.toLowerCase())
             );
             setActiveVolunteer(found || null);
             setIsSearching(false);
@@ -101,7 +101,7 @@ export default function TejasVolunteerApp() {
                     <div className="h-4 w-px bg-white/20" />
                     <div>
                         <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Crew Active</p>
-                        <p className="text-xs font-black text-white">{activeVolunteer.name}</p>
+                        <p className="text-xs font-black text-white">{activeVolunteer?.name || "Volunteer"}</p>
                     </div>
                 </div>
                 {isCheckedIn && (

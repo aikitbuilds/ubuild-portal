@@ -4,6 +4,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { TejasSidebar } from "@/components/tejas/TejasSidebar";
 import { Search, Bell, Clock } from "lucide-react";
+import { IntelligenceWidget } from "@/components/tejas/IntelligenceWidget";
 
 export default function TejasLayout({
     children,
@@ -11,15 +12,40 @@ export default function TejasLayout({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
-    const isMobileCheckIn = pathname?.includes("/tejas/checkin");
+    const normalizedPath = pathname?.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
 
-    if (isMobileCheckIn) {
+    const isPublicPage =
+        normalizedPath === "/tejas" ||
+        normalizedPath?.includes("/tejas/checkin") ||
+        normalizedPath?.includes("/tejas/docs") ||
+        (normalizedPath?.startsWith("/tejas/strategy/") && normalizedPath !== "/tejas/strategy");
+
+    if (isPublicPage) {
         return (
             <div className="min-h-screen bg-[#0B1120] text-slate-200">
                 {children}
             </div>
         );
     }
+
+    const [time, setTime] = React.useState<string>("");
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+        const updateTime = () => {
+            setTime(new Date().toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            }));
+        };
+        updateTime();
+        const interval = setInterval(updateTime, 1000 * 60);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className="min-h-screen bg-[#0B1120] text-slate-200 flex">
@@ -40,7 +66,7 @@ export default function TejasLayout({
                     <div className="flex items-center gap-6">
                         <div className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-500 tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
                             <Clock className="w-3 h-3 text-[#E67E22]" />
-                            Updated: Jan 21, 2026: 7:02 AM
+                            {mounted ? time : "Initializing..."}
                         </div>
                         <button className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
                             <Bell className="w-5 h-5 text-slate-400" />
@@ -55,6 +81,7 @@ export default function TejasLayout({
                         {children}
                     </div>
                 </main>
+                <IntelligenceWidget />
             </div>
         </div>
     );

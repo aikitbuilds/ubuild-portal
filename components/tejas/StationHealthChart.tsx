@@ -2,7 +2,8 @@
 
 import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
-import { MOCK_STATIONS, Assignment } from "@/lib/tejas/data";
+import { Assignment } from "@/lib/tejas/schema";
+import { MOCK_STATIONS } from "@/lib/tejas/data";
 
 interface StationHealthChartProps {
     assignments: Assignment[];
@@ -21,7 +22,7 @@ export function StationHealthChart({ assignments }: StationHealthChartProps) {
         };
 
         return MOCK_STATIONS.map(station => {
-            const actual = assignments.filter(a => a.station === station).length;
+            const actual = assignments.filter(a => a.stationId === station).length;
             const target = TARGETS[station] || 5;
             const percentage = (actual / target) * 100;
 
